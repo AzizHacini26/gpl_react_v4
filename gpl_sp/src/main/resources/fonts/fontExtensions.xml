@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontExtensions>
+    <fontFamily name="Amiri">
+        <normal>Amiri.ttf</normal>
+    </fontFamily>
+    <fontFamily name="Arial">
+        <normal>arial.ttf</normal>
+    </fontFamily>
+    <fontFamily name="DejaVu Sans">
+        <normal>DejaVuSans.ttf</normal>
+    </fontFamily>
+    <fontFamily name="Segoe UI Symbol">
+        <normal>Segoe-UI-Symbol.ttf</normal>
+    </fontFamily>
+    <fontFamily name="SFA">
+        <normal>sfa.ttf</normal>
+    </fontFamily>
+</fontExtensions>

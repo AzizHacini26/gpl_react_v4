@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EtacheiteReport1" language="groovy" pageWidth="595" pageHeight="850" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3c16c33b-7c3b-44d3-94e9-ca82a0d84b3e">
+	<property name="ireport.zoom" value="1.5972000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="288"/>
+	<parameter name="carnumb" class="java.lang.String"/>
+	<parameter name="name" class="java.lang.String"/>
+	<parameter name="marque" class="java.lang.String"/>
+	<parameter name="tiraz" class="java.lang.String"/>
+	<parameter name="type" class="java.lang.String"/>
+	<parameter name="ordre" class="java.lang.String"/>
+	<parameter name="prod" class="java.lang.String"/>
+	<parameter name="sizenumb" class="java.lang.String"/>
+	<parameter name="reservoirN" class="java.lang.String"/>
+	<parameter name="annee" class="java.lang.String"/>
+	<parameter name="adress" class="java.lang.String"/>
+	<parameter name="phoneEmail" class="java.lang.String"/>
+	<parameter name="instalateur" class="java.lang.String"/>
+	<parameter name="dateEpreuve" class="java.lang.String"/>
+	<parameter name="dateValidite" class="java.lang.String"/>
+	<parameter name="wilaya" class="java.lang.String"/>
+	<parameter name="marqueR" class="java.lang.String"/>
+	<parameter name="agrement" class="java.lang.String"/>
+	<background>
+		<band height="802">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="802" uuid="cb127d86-827e-4f6b-b2bf-853b8e3973b7"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</background>
+	<title>
+		<band height="802" splitType="Stretch">
+			<staticText>
+				<reportElement x="305" y="30" width="230" height="90" uuid="2f2c07b0-fb4a-4b7b-919f-d34bfbea9c6a"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="12" isBold="true" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[تسمية المركب :
+رقم الاعتماد :
+عنوان الورشة :
+رقم الهاتف / البريد الالكتروني :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="130" width="495" height="32" uuid="71f2f5b4-7c41-4745-93bf-4b95b57d5c4c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22" isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[CERTIFICAT D'ETANCHEITE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="175" width="495" height="20" uuid="a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"/>
+				<textElement>
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[VEHICULE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="200" width="120" height="20" uuid="b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Immatricule :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="225" width="120" height="20" uuid="c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Genre :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="250" width="120" height="20" uuid="d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Type :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="200" width="120" height="20" uuid="e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Appartenant à :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="225" width="120" height="20" uuid="f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marque :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="250" width="120" height="20" uuid="a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° d'ordre :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="180" y="200" width="130" height="20" uuid="b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e"/>
+				<textElement>
+					<font isBold="true" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{carnumb} == null ? "" : $P{carnumb}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="180" y="225" width="130" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tiraz} == null ? "" : $P{tiraz}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="180" y="250" width="130" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{type} == null ? "" : $P{type}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="445" y="200" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{name} == null ? "" : $P{name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="445" y="225" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{marque} == null ? "" : $P{marque}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="445" y="250" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ordre} == null ? "" : $P{ordre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="285" width="495" height="20" uuid="b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e"/>
+				<textElement>
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[RESERVOIR:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="310" width="120" height="20" uuid="c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marque :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="335" width="120" height="20" uuid="d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Capacité :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="360" width="120" height="20" uuid="e7f8a9b0-c1d2-4e3f-4a5b-6c7d8e9f0a1b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date d'épreuve :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="310" width="120" height="20" uuid="f8a9b0c1-d2e3-4f4a-5b6c-7d8e9f0a1b2c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Réservoir :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="335" width="120" height="20" uuid="a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Année fabrication :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="360" width="120" height="20" uuid="b0c1d2e3-f4a5-4b6c-7d8e-9f0a1b2c3d4e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date de validité :]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="180" y="310" width="130" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{marqueR} == null ? "" : $P{marqueR}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="180" y="335" width="130" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="d2e3f4a5-b6c7-4d8e-9f0a-1b2c3d4e5f6a"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sizenumb} == null ? "" : $P{sizenumb}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="180" y="360" width="130" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7b"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateEpreuve} == null ? "" : $P{dateEpreuve}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="445" y="310" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="f4a5b6c7-d8e9-4f0a-1b2c-3d4e5f6a7b8c"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{reservoirN} == null ? "" : $P{reservoirN}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="445" y="335" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="a5b6c7d8-e9f0-4a1b-2c3d-4e5f6a7b8c9d"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{annee} == null ? "" : $P{annee}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="445" y="360" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="b6c7d8e9-f0a1-4b2c-3d4e-5f6a7b8c9d0e"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateValidite} == null ? "" : $P{dateValidite}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="403" width="515" height="22" uuid="72501d58-169e-415f-a49e-e2db5bfd4802"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SERVICE DES MINES DU : ..........................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="435" width="495" height="16" uuid="f3fbe7b4-6ea7-4a51-8ab3-2b6c7a6614a6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTROLE PERIODIQUE DU : ..........................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="457" width="495" height="16" uuid="8cf1f7a7-3f65-4c38-8804-2e3a1db6a1d3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[L'EXPERT MR : .........................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="479" width="495" height="16" uuid="b39e9b2b-8b7e-4c18-a0f5-5b8f3cc62a9e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CACHET ET SIGNATURE : ..............................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="508" width="475" height="72" uuid="1f2ce50e-1e46-4b0c-bb29-f3e0a5c31f2a"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Test d'etancheite a 10 bars sur l'installation GPL/C de ce vehicule realisee avec succes.
+Vehicule a representer au prochain controle technique avant le : ...............................
+Toute modification ou réparation intervenant sur une installation au GPL/C équipant un véhicule automobile doit faire l'objet d'un agrément conformément aux prescriptions du décret n° 83-496 relatif aux conditions d'utilisation et de distribution du GPL carburant sur les véhicules Automobiles.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="620" width="475" height="74" uuid="f2c9124f-0e89-4f1b-8dc2-0bc0c7b6047d"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[A l'issue de chaque chargement, il importe d'aerer suffisamment et efficacement aussi bien le coffre que l'habitacle. Durant cette operation les passangers et le conducteur devront s'abstenir d'utiliser ou de provoquer toute flamme ou etincelle pour quelque motif que se soit.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="584" width="515" height="22" uuid="f88ed492-48d1-423a-b9f3-9daa6eb67171"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONSIGNES PARTICULIERES]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="290" y="715" width="245" height="16" uuid="2bc2c2a1-8b5f-4c92-ae7d-5d5b2d4c8e29"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Wilaya le :" + $P{wilaya}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="748" width="437" height="18" uuid="5b6f4b0e-8e63-4ce2-b5b5-3f2ce16d8e1b"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° D'ENREGITREMENT : ...................................................................]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="0" y="30" width="305" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="1da9daed-249b-490d-9958-ab3b1c249a27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{instalateur}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="0" y="50" width="305" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="4a89f0f9-a07f-4d30-bef9-42f94d6e45c8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{agrement}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="0" y="70" width="305" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="ccdfa885-6aa6-4fac-b539-c56c8ace3fa3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{adress}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="0" y="90" width="305" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="60f3ade7-78da-466d-8948-4c5ade3e90dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{phoneEmail}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="1"/>
+	</pageHeader>
+</jasperReport>

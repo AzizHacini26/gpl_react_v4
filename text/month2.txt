@@ -1,0 +1,44 @@
+Month 2 — Real Frontend Skills
+🎯 Goal: Build professional UI
+
+Learn:
+
+React Router
+
+API calls (fetch / axios)
+
+Context API
+
+Basic state management
+
+Custom hooks
+
+Reusable components
+
+UI libraries (MUI or Ant Design)
+
+Important:
+
+Form validation
+
+Loading states
+
+Error handling
+
+🔨 Project:
+
+Build:
+
+Admin Dashboard:
+
+Sidebar
+
+Navbar
+
+Table with pagination
+
+Add/Edit/Delete modal
+
+Authentication UI
+
+Make it look professional.

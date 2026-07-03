@@ -1,0 +1,23 @@
+Month 6 — Professional Level Upgrade
+
+Now level up:
+
+Learn:
+
+Docker (very important for remote jobs)
+
+Basic CI/CD
+
+PostgreSQL
+
+Redis (basic idea)
+
+Microservices concept
+
+Clean architecture principles
+
+Optional strong additions:
+
+Unit testing (JUnit + React testing)
+
+Basic system design

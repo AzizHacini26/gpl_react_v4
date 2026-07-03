@@ -1,0 +1,33 @@
+14/02/2026
+Goal: Be comfortable building real UIs
+
+Learn:
+
+ES6+ (arrow functions, destructuring, async/await) x
+
+Functional components x
+
+JSX x
+
+Props x
+
+useState x
+
+useEffect x
+
+Event handling
+
+Forms
+
+Conditional rendering
+
+Lists & keys
+ 
+
+Build:
+
+Simple dashboard UI
+
+CRUD interface (fake data first)
+
+Login form UI

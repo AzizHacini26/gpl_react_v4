@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="024921ea-90a8-47eb-a45b-4d250cf5248b">
+	<property name="ireport.zoom" value="2.1435888100000042"/>
+	<property name="ireport.x" value="808"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="carnumb" class="java.lang.String"/>
+	<parameter name="name" class="java.lang.String"/>
+	<parameter name="marque" class="java.lang.String"/>
+	<parameter name="tsalsely" class="java.lang.String"/>
+	<parameter name="tiraz" class="java.lang.String"/>
+	<parameter name="battlenumb" class="java.lang.String"/>
+	<parameter name="sizenumb" class="java.lang.String"/>
+	<parameter name="du" class="java.lang.String"/>
+	<parameter name="domc" class="java.lang.String"/>
+	<parameter name="type" class="java.lang.String"/>
+	<parameter name="au" class="java.lang.String"/>
+	<parameter name="id" class="java.lang.String"/>
+	<parameter name="wilaya" class="java.lang.String"/>
+	<parameter name="pression" class="java.lang.String"/>
+	<parameter name="bmarque" class="java.lang.String"/>
+	<detail>
+		<band height="555" splitType="Stretch">
+			<rectangle>
+				<reportElement x="425" y="0" width="377" height="555" uuid="92ca8676-84ba-4988-80e2-819828e12045"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="619" y="207" width="54" height="16" uuid="f9d02654-54e8-48bb-b144-b3da190e6237"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marque :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="490" y="207" width="120" height="16" uuid="831e153b-3e64-4cb7-97ee-9fe22e53fa8b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{type}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="610" y="318" width="95" height="16" uuid="ec09d76b-b144-4f00-802a-6df2a403ff1a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date d'épreuve :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="611" y="277" width="50" height="16" uuid="20a04bee-395e-4016-8730-0388cccb62a2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="435" y="502" width="300" height="20" uuid="72813e30-ecfc-4e65-b682-28c617b75559"/>
+				<textFieldExpression><![CDATA["Wilaya " + $P{wilaya} +" LE : ....../......"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="692" y="161" width="108" height="16" uuid="aef1cd10-3f49-457b-bde2-92962ff28a8f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{carnumb}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="611" y="299" width="110" height="16" uuid="618607ab-1ba8-4f6e-a851-c43737e9c67e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Année fabrication :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="437" y="357" width="357" height="103" uuid="2f8d1968-21fe-42c9-919e-8982f55c3775"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Toute modification ou réparation intervenant sur une installation au GPL/C
+équipant un véhicule automobile doit faire l'objet d'un agrément conformément
+aux prescriptions du décret n° 83-496 relatif aux conditions d'utilisation et de
+distribution du GPL carburant sur les véhicules Automobiles.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="661" y="277" width="139" height="16" uuid="47f0f04b-32cd-4344-bf56-bfe6c9e73429"/>
+				<textFieldExpression><![CDATA[$P{battlenumb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="277" width="123" height="16" uuid="d360652f-ee39-4a3f-92f4-5072164e5b6a"/>
+				<textFieldExpression><![CDATA[$P{bmarque}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="425" y="0" width="375" height="18" uuid="1e88a90f-0c03-41b0-b060-8e4ad6157929"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Le directeur de l'énergie et des mines]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="619" y="229" width="59" height="16" uuid="db4c6f69-c607-49b2-976a-39ca41de3fc8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° D'ordre :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="437" y="207" width="50" height="16" uuid="db43736d-e9ae-4fc3-b3f4-b2a67490bdd3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Genre :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="437" y="277" width="54" height="16" uuid="65a6f146-c300-4794-b78b-cd6c3520b7df"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marque :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="189" width="160" height="16" uuid="941304ea-057b-4651-bfcd-7fe0b183bfe0"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[VEHICULE:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="721" y="299" width="82" height="16" uuid="49dae779-a9bb-4e45-9808-57dcc04511c5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{du}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="680" y="229" width="120" height="16" uuid="b65e02e7-d293-41a1-9575-cff39607fa34"/>
+				<textFieldExpression><![CDATA[$P{tsalsely}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="445" y="134" width="80" height="16" uuid="bcb79392-8904-47a9-a746-67d61564ae0f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Domicile :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="161" width="238" height="16" uuid="ebf13a57-1a47-450b-a861-d1b0606156d4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[à mettre en circulation le véhicule immatriculé :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="18" width="375" height="60" uuid="9c187912-54ef-43ea-a16b-4fb2ea40d364"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[En application de l'arrêté interministériel du 31 Aout 1983 portant
+condition d'équipement de surveillance et d'exploitation des
+installations du G.P.L carburant équipant les véhicules automobiles .]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="525" y="134" width="255" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="9b198b0a-f68b-4f3c-b18f-577f4cf2ef73"/>
+				<textElement verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{domc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="525" y="118" width="242" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="a67a8e8c-d5d4-4309-87c8-690abf9c6701"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="673" y="207" width="127" height="16" uuid="1b060c66-b965-43b5-90ec-c27c54739b5f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{marque}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="435" y="486" width="70" height="16" uuid="c4a9f002-1716-4d85-b941-9013259a51dd"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[(MINES)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="438" y="337" width="92" height="16" uuid="d550a452-8b40-4314-a14d-2d947a7ae5ce"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pression service :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="118" width="80" height="16" uuid="b88142be-0b48-4d04-8343-da7d086cc51f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monsieur :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="490" y="229" width="120" height="16" uuid="6d912fc5-3d31-4dff-b265-baf749e081e3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tiraz}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="437" y="255" width="160" height="16" uuid="c70929cf-2661-47ea-83d8-caee2fbac699"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[RESERVOIR:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="78" width="375" height="22" uuid="27d35979-2d89-468b-8864-551f70ed53a2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AUTORISE]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="703" y="319" width="97" height="16" uuid="74b7ea33-0b75-4b71-bd1f-3ac6053ece6c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{au}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="437" y="229" width="50" height="16" uuid="9d1de73e-0de1-44f6-a205-35273573d190"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Type :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="491" y="299" width="120" height="16" uuid="7ee1128f-8013-4869-94bf-a048a99b3e31"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sizenumb}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="437" y="299" width="54" height="16" uuid="b658038e-50f6-4c02-90e1-77b7afa1ed71"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Capacité :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="435" y="522" width="100" height="20" uuid="f62b1b28-5831-445a-b749-e98dc097c306"/>
+				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="692" y="470" width="88" height="17" uuid="4d1e4f86-2b5e-44fe-a574-0c8ee18ee9ea"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[L'INGENIEUR]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="530" y="337" width="100" height="16" uuid="02591429-a1c7-4874-b4ec-35a12d7a591c"/>
+				<textFieldExpression><![CDATA[$P{pression}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

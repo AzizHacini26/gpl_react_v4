@@ -1,0 +1,27 @@
+configuration
+server resources
+libraries
+web :
+    routes
+    layout
+    template
+    login
+    account
+    denied
+    pages:
+        ... 
+    css:   
+        ...
+    images:
+        ...
+filter:
+   denied
+   ....
+
+
+
+
+   spring boot 
+   entity
+   controllers
+   repository

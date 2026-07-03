@@ -1,0 +1,338 @@
+.bg {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    linear-gradient(180deg, rgba(248, 250, 252, 0.92) 0%, rgba(241, 245, 249, 0.88) 100%),
+    url('../images/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.app-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-xs);
+}
+
+.app-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  min-width: 0;
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.brand-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+}
+
+.brand-title {
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+  font-size: 1.15rem;
+  overflow-wrap: anywhere;
+}
+
+.product-year-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary-700);
+  background: var(--color-primary-50);
+  border: 1px solid var(--color-primary-100);
+  border-radius: var(--radius-full);
+  padding: 0.2rem 0.65rem;
+}
+
+.brand-row h2 {
+  overflow-wrap: anywhere;
+}
+
+.app-nav-wrap {
+  padding: 4px 20px 8px;
+  border-top: 1px solid var(--color-border);
+  min-width: 0;
+}
+
+.main-nav-end {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.language-button.p-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--color-text);
+  flex: 0 0 auto;
+}
+
+.language-button.p-button:enabled:hover {
+  color: var(--color-primary-700);
+  background: var(--color-primary-50);
+}
+
+.app-main {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  padding: clamp(0.5rem, 1.5vw, 1.25rem);
+}
+
+.app-footer {
+  background: rgba(255, 255, 255, 0.95);
+  border-top: 1px solid var(--color-border);
+  padding: 1rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 8px;
+}
+
+.footer-copy {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 12px;
+  margin-left: 12px;
+  border-left: 1px solid #bdbdbd;
+}
+
+.top-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  color: #ffffff;
+}
+
+.logo-box {
+  width: 90px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.top-bar .logo-box:last-child {
+  justify-self: end;
+}
+
+.page-title {
+  margin: 0;
+  text-align: center;
+  font-size: 28px;
+}
+
+.login-form {
+  display: grid;
+  place-content: center;
+  gap: 12px;
+}
+
+.login-form input {
+  width: 280px;
+  padding: 10px 12px;
+  border: 1px solid #d7dce5;
+  border-radius: 8px;
+}
+
+.p-menubar .p-menuitem.menu-item-active > .p-menuitem-content > .p-menuitem-link {
+  background: var(--color-primary-600);
+  color: #ffffff;
+  border-radius: var(--radius-sm);
+}
+
+.p-menubar .p-menuitem > .p-menuitem-content > .p-menuitem-link {
+  border-radius: 8px;
+}
+
+.p-menubar {
+  max-width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.p-menubar-root-list {
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.p-menubar .p-menuitem-link {
+  min-width: 0;
+}
+
+.p-menubar .p-menuitem.menu-item-active > .p-menuitem-content > .p-menuitem-link {
+  background: var(--color-primary-600);
+  color: #ffffff;
+  border-radius: var(--radius-sm);
+}
+
+.p-menubar-mobile-toggle {
+  display: none !important;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  color: var(--color-text);
+  font-size: 1.25rem;
+  transition: background var(--transition-fast);
+}
+
+.mobile-menu-btn:hover {
+  background: var(--color-surface-muted);
+}
+
+.anim-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.anim-slide-up {
+  animation: slideUp 0.35s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+
+@media (max-width: 900px) {
+  .app-header-top,
+  .app-nav-wrap {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .p-menubar {
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .p-menubar-end {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .main-nav-end {
+    width: 100%;
+  }
+
+  .language-button.p-button {
+    width: 2.5rem;
+  }
+
+  .footer-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .footer-icons {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .brand-row h2 {
+    font-size: 1.2rem;
+  }
+
+  .mobile-menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .app-nav-wrap {
+    display: none;
+  }
+
+  .app-nav-wrap[style*="block"] {
+    display: block !important;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .app-nav-wrap .p-menubar {
+    flex-direction: column;
+  }
+
+  .app-nav-wrap .p-menubar-root-list {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .app-nav-wrap .p-menubar .p-menuitem {
+    width: 100%;
+  }
+
+  .app-nav-wrap .p-menubar .p-menuitem-link {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

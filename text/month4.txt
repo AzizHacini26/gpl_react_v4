@@ -1,0 +1,41 @@
+Month 4 — Spring Boot Professional Backend
+
+You already know some Spring, but now do it professionally.
+
+Learn deeply:
+
+REST APIs
+
+DTO pattern
+
+MapStruct or manual mapping
+
+Validation
+
+Exception handling
+
+Spring Security
+
+JWT authentication
+
+Role-based authorization
+
+Pagination
+
+Filtering
+
+Swagger documentation
+
+🔨 Project:
+
+Build real backend for your dashboard:
+
+User management
+
+Roles
+
+Products
+
+Orders
+
+Secure endpoints

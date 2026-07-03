@@ -1,0 +1,179 @@
+Phase 1 — Foundation (2–4 days)
+
+Goal: Understand how PrimeReact works inside React.
+
+✅ 1. Setup & Theming
+
+Install PrimeReact
+
+Import theme
+
+Understand how themes work
+
+Switch between 2 themes
+
+👉 Important because styling is theme-based.
+
+✅ 2. Core Components
+
+Learn these first:
+
+Button
+
+InputText
+
+Dropdown
+
+Checkbox
+
+RadioButton
+
+Card
+
+Panel
+
+Tag
+
+Avatar
+
+Focus on:
+
+props
+
+controlled inputs (value + onChange)
+
+className usage
+
+✅ 3. Layout Basics
+
+Learn:
+
+PrimeFlex (if you use it)
+
+CSS utility classes
+
+Grid system
+
+Flex layout
+
+Goal:
+Build a simple responsive form layout.
+
+🟡 Phase 2 — Forms & Interaction (1 week)
+
+Now we go deeper.
+
+✅ 4. Advanced Inputs
+
+Learn:
+
+Calendar
+
+InputNumber
+
+Password
+
+AutoComplete
+
+MultiSelect
+
+Focus:
+
+Validation
+
+Controlled state
+
+Conditional rendering
+
+✅ 5. Dialog & Overlay Components
+
+Dialog
+
+Sidebar
+
+ConfirmDialog
+
+Toast
+
+Tooltip
+
+Goal:
+Build a popup form with success notification.
+
+🔵 Phase 3 — Data Handling (VERY IMPORTANT)
+
+This is where PrimeReact shines.
+
+✅ 6. DataTable (Core Skill)
+
+Learn:
+
+columns
+
+sorting
+
+filtering
+
+pagination
+
+row selection
+
+row editing
+
+custom body templates
+
+DataTable mastery = serious frontend level.
+
+✅ 7. CRUD Pattern
+
+Build:
+
+Add item
+
+Edit item
+
+Delete item
+
+Confirm delete
+
+Show Toast
+
+This is real-world workflow.
+
+🟣 Phase 4 — Real Project Mode
+
+Now build one of these:
+
+🔥 Option 1: Admin Dashboard
+
+Sidebar navigation
+
+Top navbar
+
+Cards with stats
+
+DataTable with users
+
+Dialog for editing user
+
+🔥 Option 2: Task Manager
+
+Add tasks
+
+Filter tasks
+
+Edit tasks
+
+Mark complete
+
+Toast notifications
+
+🔥 Option 3: Mini CRM
+
+List customers
+
+Search & filter
+
+Edit in dialog
+
+Pagination

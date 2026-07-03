@@ -1,0 +1,26 @@
+Month 3 — Advanced Frontend + Clean Architecture
+🎯 Goal: Think like professional frontend dev
+
+Learn:
+
+Folder structure best practices
+
+Separation of concerns
+
+Reusable API service layer
+
+Protected routes
+
+Token storage (JWT)
+
+Performance basics (memo, lazy)
+
+Optional:
+
+Learn Next.js basics (for better job opportunities)
+
+🔨 Project:
+
+Build:
+
+Full frontend app ready to connect to real backend.

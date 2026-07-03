@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CardBackFace" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="712cd032-7638-4022-8550-99b5f86a0a41">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="27"/>
+	<parameter name="agriment" class="java.lang.String"/>
+	<parameter name="annee" class="java.lang.String"/>
+	<parameter name="wilaya" class="java.lang.String"/>
+	<parameter name="wilayaAr" class="java.lang.String"/>
+	<title>
+		<band height="802" splitType="Stretch">
+			<rectangle>
+				<reportElement x="18" y="25" width="240" height="280" uuid="9fb371bc-3bbc-4f12-8ca9-39d6ad8da8f3"/>
+			</rectangle>
+			<line>
+				<reportElement x="18" y="70" width="240" height="1" uuid="2f12ef7a-4e5d-4fe6-9bb9-98bbf0a5f3f8"/>
+			</line>
+			<line>
+				<reportElement x="18" y="109" width="240" height="1" uuid="0c7c76d2-988f-449b-bb96-0b51574c095f"/>
+			</line>
+			<line>
+				<reportElement x="18" y="148" width="240" height="1" uuid="d70a0b6d-b0b8-4d05-b1a7-99135bdbf216"/>
+			</line>
+			<line>
+				<reportElement x="18" y="187" width="240" height="1" uuid="e0a1ce26-35d8-4d96-9ae0-7c0b8e9f6a8a"/>
+			</line>
+			<line>
+				<reportElement x="18" y="226" width="240" height="1" uuid="1fc12417-822a-4ae6-ae17-28269b46c01b"/>
+			</line>
+			<line>
+				<reportElement x="18" y="265" width="240" height="1" uuid="cab4a17b-e10c-4c96-a78a-2b4e3ed4b7a0"/>
+			</line>
+			<line>
+				<reportElement x="128" y="70" width="1" height="235" uuid="ce16b6b7-7b7b-4f96-8a1f-4d04e2075d7b"/>
+			</line>
+			<staticText>
+				<reportElement x="18" y="30" width="240" height="35" uuid="e28c5dc8-c6c1-4388-9f75-0a7de5a8b7a8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VISITES PERIODIQUES
+- 30 Mois -]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="128" y="75" width="130" height="30" uuid="f7e0a23b-4e87-4aa4-b1f4-7b4c8e2d2b4f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valable Jusqu'au :
+.... / .... / 20....]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="293" y="25" width="240" height="280" uuid="ab49f321-4204-4a30-a58c-3d637b7a9a77"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="293" y="40" width="240" height="18" uuid="5ef7aa17-8f0f-4c6e-9ddf-0c9f6e12a5f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[وزارة الطاقة والمناجم]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="60" width="240" height="16" uuid="ad1b8e03-8b4b-4b72-8b9c-7b7a4d5e8c3a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MINISTERE DE L'ENERGIE ET DES MINES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="79" width="240" height="16" uuid="a2f6f3c7-0a92-4b2f-9b7c-3b9d6c8c2e6a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[مديريه الطاقه والمناجم]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="121" width="240" height="16" uuid="5d2fd1a4-0b28-4b86-93f6-8f0d3db3b6a4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECTION DE L'ENERGIE ET DES MINES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="225" width="240" height="18" uuid="a1e4b2f1-7c82-4fe0-b0f7-0e9b0a8e2c41"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AUTORISATION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="247" width="240" height="16" uuid="b30d24aa-58b4-4b71-a6a4-0b1c2b2d9cb7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[De mise en circulation d'un véhicule]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="264" width="240" height="16" uuid="0a5b3f21-8f01-4d4c-92d0-2b8a91f4cbcc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[avec utilisation du GPL/C]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="282" width="240" height="16" uuid="87f0e38b-5a9e-4d35-9c3b-ffdb26b62c31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Décret n° 83-496 du 13 août 1983]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="293" y="167" width="240" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="28f6681c-1d48-4018-acf5-ab0a6f2eb633"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{agriment}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="293" y="192" width="240" height="20" uuid="e657307b-255f-4b05-bc26-093f2b35dd04"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{annee}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="293" y="95" width="240" height="20" uuid="b5341f8b-ed7c-4652-b483-4093d14a1b3a"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ولاية :" +$P{wilayaAr} ]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="293" y="142" width="240" height="20" uuid="758a32a0-14bb-4703-8fa7-0267035a21a7"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["DE LA WILAYA DE :" + $P{wilaya}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

@@ -1,0 +1,24 @@
+Month 5 — Connect Frontend + Backend
+🎯 Goal: Become real Full-Stack
+
+Now:
+
+Connect React to Spring Boot
+
+Handle authentication properly
+
+Handle token refresh
+
+Protect routes
+
+Handle 401/403 errors
+
+Improve UX
+
+Deploy:
+
+Backend → Render / Railway / VPS
+
+Frontend → Vercel / Netlify
+
+Now you have a real online project.
