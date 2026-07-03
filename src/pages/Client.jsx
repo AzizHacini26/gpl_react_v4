@@ -296,7 +296,6 @@ export default function Client() {
                 />
                 {selectedErpClient && (
                   <div className="client-erp-selected">
-                    <span>{t('clientErp.selectedFrom')} <strong>{selectedErpClient.name}</strong></span>
                     <Button
                       type="button"
                       icon="pi pi-times"

@@ -281,12 +281,7 @@ body {
 .client-erp-selected {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   margin-top: 0.5rem;
-  padding: 0.4rem 0.75rem;
-  background: #e8f5e9;
-  border-radius: 6px;
-  font-size: 0.85rem;
 }
 
 @media (max-width: 900px) {
@@ -421,10 +416,5 @@ body {
 .client-erp-selected {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   margin-top: 0.5rem;
-  padding: 0.4rem 0.75rem;
-  background: #e8f5e9;
-  border-radius: 6px;
-  font-size: 0.85rem;
 }

@@ -294,7 +294,7 @@
     "searchPlaceholder": "Rechercher par nom ou téléphone...",
     "selectedFrom": "Importé de la base:",
     "clearSelection": "Effacer la sélection",
-    "createTitle": "Ajouter un nouveau client"
+    "createTitle": "Ajouter"
   },
   "client": {
   "docNumb": "Numéro de dossier",
