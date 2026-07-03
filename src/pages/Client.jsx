@@ -269,14 +269,14 @@ export default function Client() {
                   completeMethod={handleErpSearch}
                   field="name"
                   dropdown
-                  forceSelection
                   placeholder={t('clientErp.searchPlaceholder')}
                   onChange={(e) => {
-                    if (!e.value) {
+                    if (typeof e.value === 'object' && e.value !== null) {
+                      handleErpSelect(e);
+                    } else if (!e.value) {
                       clearErpSelection();
                     }
                   }}
-                  onSelect={handleErpSelect}
                   itemTemplate={(item) => (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', padding: '4px 0' }}>
                       <span style={{ fontWeight: 600 }}>{item.name}</span>
