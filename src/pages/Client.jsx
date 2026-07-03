@@ -307,11 +307,22 @@ export default function Client() {
             <label><strong>Full Name *</strong></label>
             <InputText value={formData.name || ''} onChange={(e) => onFormChange('name', e.target.value)} />
 
-            <label><strong>ID Code</strong></label>
-            <InputText
-              value={formData.idcode || suggestedIdCode}
-              onChange={(e) => onFormChange('idcode', e.target.value)}
-            />
+            <label><strong>ID Code</strong> <span style={{ fontSize: '0.8rem', color: '#888' }}>(Année: {productYear})</span></label>
+            {isEditing ? (
+              <InputText
+                value={formData.idcode || ''}
+                onChange={(e) => onFormChange('idcode', e.target.value)}
+              />
+            ) : (
+              <InputText
+                value={formData.idcode ? (formData.idcode.split('-')[0] || '') : (suggestedIdCode.split('-')[0] || '')}
+                onChange={(e) => {
+                  const digits = e.target.value.replace(/\D/g, '');
+                  onFormChange('idcode', digits ? `${digits}-${productYear}` : '');
+                }}
+                placeholder={suggestedIdCode.split('-')[0] || '1'}
+              />
+            )}
 
             <label><strong>Phone *</strong></label>
             <InputText value={formData.phone || ''} onChange={(e) => onFormChange('phone', e.target.value)} />
@@ -389,12 +400,17 @@ export default function Client() {
   };
 
   const handleBeforeSave = (currentFormData, editingItem) => {
-    const manualIdCode = normalizeIdCode(currentFormData.idcode);
+    let manualIdCode = normalizeIdCode(currentFormData.idcode);
     const idCodeSource = clientHook.rawItems || clientHook.items;
+
+    if (manualIdCode && /^\d+$/.test(manualIdCode)) {
+      manualIdCode = `${manualIdCode}-${productYear}`;
+    }
+
     const resolvedIdCode = manualIdCode || generateNextClientIdCode(idCodeSource, productYear);
 
     if (!isValidIdCodeFormat(resolvedIdCode)) {
-      window.alert('ID Code must use this format: number-year (example: 1-2026).');
+      window.alert(`ID Code must use this format: number-year (example: 1-2026). Got: "${resolvedIdCode}"`);
       return false;
     }
 

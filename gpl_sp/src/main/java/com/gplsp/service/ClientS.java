@@ -338,6 +338,14 @@ public class ClientS {
         return normalized.isEmpty() ? null : normalized;
     }
 
+    public String getNextIdCode(int year) {
+        UserT currentUser = getCurrentUser();
+        if (currentUser == null) {
+            return "1-" + year;
+        }
+        return generateNextIdCode(currentUser, year);
+    }
+
     private String generateNextIdCode(UserT user, int year) {
         final String yearSuffix = "-" + year;
         int maxSequence = 0;

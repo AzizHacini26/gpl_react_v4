@@ -21,6 +21,14 @@ export const ClientService = {
     return response.json();
   },
 
+  getNextIdCode: async (year) => {
+    const response = await apiFetch(`${API_URL}/next-idcode?year=${year}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch next ID code');
+    }
+    return response.text();
+  },
+
   getById: async (id) => {
     const response = await apiFetch(`${API_URL}/${id}`);
     if (!response.ok) {
