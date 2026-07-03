@@ -108,6 +108,7 @@ export default function Client() {
 
   const [erpSearchResults, setErpSearchResults] = useState([]);
   const [selectedErpClient, setSelectedErpClient] = useState(null);
+  const [erpSearchText, setErpSearchText] = useState('');
 
   const handleErpSearch = async (event) => {
     const query = event.query;
@@ -160,6 +161,7 @@ export default function Client() {
 
   const clearErpSelection = () => {
     setSelectedErpClient(null);
+    setErpSearchText('');
     clientHook.setFormData((prev) => ({
       ...prev,
       clientErp: null,
@@ -247,6 +249,7 @@ export default function Client() {
 
     const handleDialogHide = () => {
       setSelectedErpClient(null);
+      setErpSearchText('');
       onHide();
     };
 
@@ -264,19 +267,24 @@ export default function Client() {
               <div className="client-erp-search">
                 <label><strong>{t('clientErp.searchLabel')}</strong></label>
                 <AutoComplete
-                  value={selectedErpClient}
+                  value={selectedErpClient || erpSearchText}
                   suggestions={erpSearchResults}
                   completeMethod={handleErpSearch}
-                  field="name"
                   dropdown
                   placeholder={t('clientErp.searchPlaceholder')}
+                  selectedItemTemplate={(value) => {
+                    if (typeof value === 'object' && value !== null) return value.name || '';
+                    return value || '';
+                  }}
                   onChange={(e) => {
-                    if (typeof e.value === 'object' && e.value !== null) {
-                      handleErpSelect(e);
+                    if (typeof e.value === 'string') {
+                      setErpSearchText(e.value);
                     } else if (!e.value) {
                       clearErpSelection();
                     }
                   }}
+                  onSelect={handleErpSelect}
+
                   itemTemplate={(item) => (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', padding: '4px 0' }}>
                       <span style={{ fontWeight: 600 }}>{item.name}</span>
