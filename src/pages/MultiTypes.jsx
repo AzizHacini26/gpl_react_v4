@@ -14,7 +14,7 @@ export default function MultiTypes() {
     const canDeleteCompanyInfo = hasPermission('DELETE_TYPES');
     const canCreateCompanyInfo = hasPermission('ADD_TYPES');
   
-  const [selectedType, setSelectedType] = useState(null);
+  const [selectedType, setSelectedType] = useState('MARQUE');
 
   const useFilteredMultiTypes = () => {
     const hook = useMultiTypes();
@@ -22,7 +22,7 @@ export default function MultiTypes() {
     const filteredItems = useMemo(() => {
       if (!selectedType) return hook.items;
       return hook.items.filter((item) => item?.type === selectedType);
-    }, [hook.items]);
+    }, [hook.items, selectedType]);
 
     return {
       ...hook,
@@ -73,9 +73,10 @@ export default function MultiTypes() {
       entityName="multitype"
       columns={columns}
       dialogFields={dialogFields}
+      frozenActions
       rightToolbarExtras={(
         <Dropdown //default filter by type STATE
-          value={selectedType || 'MARQUE'}
+          value={selectedType}
           options={TYPE_OPTIONS}
           onChange={(e) => setSelectedType(e.value)}
           placeholder="Filter by type"

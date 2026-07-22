@@ -55,7 +55,7 @@
 			<staticText>
 				<reportElement x="293" y="40" width="240" height="18" uuid="5ef7aa17-8f0f-4c6e-9ddf-0c9f6e12a5f3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font size="12" isBold="true" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[وزارة الطاقة والمناجم]]></text>
 			</staticText>
@@ -69,7 +69,7 @@
 			<staticText>
 				<reportElement x="293" y="79" width="240" height="16" uuid="a2f6f3c7-0a92-4b2f-9b7c-3b9d6c8c2e6a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="true" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font size="10" isBold="true" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[مديريه الطاقه والمناجم]]></text>
 			</staticText>
@@ -126,7 +126,7 @@
 			<textField>
 				<reportElement x="293" y="95" width="240" height="20" uuid="b5341f8b-ed7c-4652-b483-4093d14a1b3a"/>
 				<textElement textAlignment="Center">
-					<font pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["ولاية :" +$P{wilayaAr} ]]></textFieldExpression>
 			</textField>

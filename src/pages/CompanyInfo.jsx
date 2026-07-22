@@ -133,6 +133,7 @@ export default function CompanyInfo() {
       showEditAction={canEditCompanyInfo}
       showDeleteAction={canDeleteCompanyInfo}
       showCreateAction={canCreateCompanyInfo}
+      frozenActions
     />
   );
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="525a40bc-e97c-4623-a6bd-64da8259f016">
-	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.zoom" value="1.2100000000000006"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="661"/>
+	<property name="ireport.y" value="339"/>
 	<parameter name="carnumb" class="java.lang.String"/>
 	<parameter name="instalateur" class="java.lang.String"/>
 	<parameter name="agrement" class="java.lang.String"/>
@@ -37,80 +37,77 @@
 				<text><![CDATA[الجمهورية الجزائرية الديمقراطية الشعبية]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="95" y="76" width="360" height="24" uuid="c5d9ac9d-bbec-4f77-9441-9e3252f5abf4"/>
+				<reportElement x="95" y="79" width="360" height="24" uuid="c5d9ac9d-bbec-4f77-9441-9e3252f5abf4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CERTIFICAT DE MONTAGE ET VERIFICATION]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="70" y="120" width="420" height="22" uuid="6f88d6e9-ab10-4440-b682-a40ba56f5532"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="30" y="133" width="420" height="22" uuid="6f88d6e9-ab10-4440-b682-a40ba56f5532"/>
+				<textElement verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Je soussignés installateur  "+$P{instalateur}.toString()]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="30" y="155" width="490" height="20" uuid="5400f016-9d2f-4ee1-a9d1-fdc95dca0af0"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Certifions que le véhicule décrit ci-dessous a été équipé conformément aux prescriptions du décret n°]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="30" y="175" width="490" height="20" uuid="9d68ccad-0f4d-4e1b-b409-a8193f16eca1"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[469/83 du 1e Jl Août 1983 relatif aux condition d'équipement de surveillance et d'exploitation des]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="30" y="195" width="490" height="20" uuid="03247a89-56b8-48be-94bf-7ead41557ebf"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[installations de GPL équipemen les véhicules automobiles.]]></text>
 			</staticText>
-			<line>
-				<reportElement x="30" y="222" width="490" height="1" uuid="c8cc82b8-6a45-49d6-9e8a-1488438053e0"/>
-			</line>
 			<staticText>
-				<reportElement x="145" y="258" width="260" height="15" uuid="595599f3-b4a4-4d62-842b-7649558af6f5"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="30" y="237" width="260" height="15" uuid="595599f3-b4a4-4d62-842b-7649558af6f5"/>
+				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[L'installation GPL a subi avec succès l'étanchéité à 10 bar]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="30" y="299" width="80" height="16" uuid="68f748f6-8404-48ba-b5b2-2ddd84f95f5e"/>
+				<reportElement x="30" y="273" width="80" height="20" uuid="68f748f6-8404-48ba-b5b2-2ddd84f95f5e"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Véhicule N°: "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="270" y="299" width="64" height="16" uuid="6c3b7ea6-9f7f-44b8-b26b-726e51153857"/>
+				<reportElement x="256" y="273" width="64" height="20" uuid="6c3b7ea6-9f7f-44b8-b26b-726e51153857"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA["appartement: "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="30" y="323" width="65" height="16" uuid="b1f449ca-fb01-4535-84ea-e60f2ef51f35"/>
+				<reportElement x="30" y="307" width="65" height="20" uuid="b1f449ca-fb01-4535-84ea-e60f2ef51f35"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Marque: "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="220" y="323" width="36" height="16" uuid="18e26f83-6599-4a7f-9dbf-2a9dbc70aa67"/>
+				<reportElement x="207" y="307" width="36" height="20" uuid="18e26f83-6599-4a7f-9dbf-2a9dbc70aa67"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Type: "]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="370" y="323" width="55" height="16" uuid="435b1a2f-cfa1-4df0-8244-e5f2dbf87dc7"/>
+				<reportElement x="362" y="307" width="55" height="20" uuid="435b1a2f-cfa1-4df0-8244-e5f2dbf87dc7"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
@@ -131,106 +128,97 @@
 				<text><![CDATA[Fait a le:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="45" y="529" width="115" height="30" uuid="41c6fa78-f28b-46d4-b4d0-9945aa4b0c55"/>
+				<reportElement x="30" y="566" width="115" height="30" uuid="41c6fa78-f28b-46d4-b4d0-9945aa4b0c55"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="22" isBold="true"/>
+					<font size="20" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Signature]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="130" y="664" width="295" height="43" uuid="f5df7d56-7f43-4a1c-ab07-f3ad7908887a"/>
+				<reportElement x="122" y="730" width="295" height="43" uuid="f5df7d56-7f43-4a1c-ab07-f3ad7908887a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="28" isBold="true"/>
+					<font size="20" isBold="true"/>
 				</textElement>
-				<text><![CDATA[نشكر لكم على الزيارة]]></text>
-			</staticText>
-			<rectangle radius="10">
-				<reportElement x="155" y="753" width="240" height="20" uuid="fc6f6991-0ca7-4d4d-b5f8-f63053f6fdb0"/>
-				<graphicElement>
-					<pen lineWidth="0.5"/>
-				</graphicElement>
-			</rectangle>
-			<staticText>
-				<reportElement x="160" y="757" width="230" height="12" uuid="ad9735b7-b52b-43de-b37c-7ed7c051df9d"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[ملاحظة: هذه الشهادة غير قابلة للتجديد]]></text>
+				<text><![CDATA[نشكركم على الزيارة]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="110" y="299" width="146" height="20" uuid="2bb655e9-7646-41a6-ba15-c84bad6f69a1"/>
+				<reportElement x="110" y="273" width="146" height="20" uuid="2bb655e9-7646-41a6-ba15-c84bad6f69a1"/>
 				<textFieldExpression><![CDATA[$P{carnumb}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="75" y="230" width="370" height="22" uuid="311c488c-c5d7-4f29-86e8-ef8fb3b1fd63"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="30" y="215" width="370" height="22" uuid="311c488c-c5d7-4f29-86e8-ef8fb3b1fd63"/>
+				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Numéro L'agrément:  " +$P{agrement}.toString()]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="345" y="299" width="158" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="55959caa-fdbe-4d81-b4b7-eddc41013079"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Amiri" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				<reportElement mode="Transparent" x="320" y="273" width="230" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="55959caa-fdbe-4d81-b4b7-eddc41013079"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/Amiri.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="110" y="323" width="100" height="20" uuid="1c93c797-6785-4efe-8d81-51a1cf0e2423"/>
-				<textElement>
-					<font fontName="SansSerif" pdfFontName="Amiri" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				<reportElement x="95" y="307" width="100" height="20" uuid="1c93c797-6785-4efe-8d81-51a1cf0e2423"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" pdfFontName="classpath:fonts/Amiri.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{marque}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="256" y="323" width="100" height="20" uuid="ceeca3f2-9059-4aba-9396-3d8e413ad88c"/>
+				<reportElement x="243" y="307" width="100" height="20" uuid="ceeca3f2-9059-4aba-9396-3d8e413ad88c"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{tiraz}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="426" y="323" width="100" height="20" uuid="7d2f74de-e405-427a-9ba1-ab4b166a10b4"/>
+				<reportElement x="420" y="307" width="135" height="20" uuid="7d2f74de-e405-427a-9ba1-ab4b166a10b4"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{tsalsely}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="30" y="356" width="92" height="16" uuid="90e55767-11e3-4663-accf-ec960377babf"/>
+				<reportElement x="30" y="340" width="92" height="20" uuid="90e55767-11e3-4663-accf-ec960377babf"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Réservoir GPL N°:  "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="122" y="356" width="100" height="20" uuid="3cc6686f-3e7d-461a-ac5d-57c322c8f25c"/>
+				<reportElement x="122" y="340" width="100" height="20" uuid="3cc6686f-3e7d-461a-ac5d-57c322c8f25c"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{sizenumb}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="345" y="356" width="27" height="16" uuid="c87ed0c8-725b-4371-bcdd-8ff08809e7e3"/>
+				<reportElement x="357" y="343" width="27" height="20" uuid="c87ed0c8-725b-4371-bcdd-8ff08809e7e3"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA["par:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="230" y="356" width="60" height="16" uuid="3c01de08-c834-4899-a63b-d1dbb0240119"/>
+				<reportElement x="230" y="340" width="60" height="20" uuid="3c01de08-c834-4899-a63b-d1dbb0240119"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Fabriqué en:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="445" y="356" width="58" height="16" uuid="7208b0fe-055b-4489-8a91-932e8d0ae2b5"/>
+				<reportElement x="462" y="343" width="58" height="20" uuid="7208b0fe-055b-4489-8a91-932e8d0ae2b5"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Epreuve du"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="290" y="356" width="48" height="20" uuid="60842713-ae21-41a4-9e68-de006f93c6a2"/>
+				<reportElement x="290" y="340" width="48" height="20" uuid="60842713-ae21-41a4-9e68-de006f93c6a2"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{prod}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="384" y="356" width="56" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="cf033b98-3a3a-4756-a50a-c0dfe069a617"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Amiri" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				<reportElement mode="Transparent" x="389" y="343" width="56" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="cf033b98-3a3a-4756-a50a-c0dfe069a617"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/Amiri.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{type}]]></textFieldExpression>
@@ -262,31 +250,6 @@
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA["N°: "+$P{id}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="262" y="717" width="139" height="13" uuid="765aef2c-ee78-4557-85e2-83a0c2ec5d5a"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$P{adress}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="122" y="707" width="51" height="20" uuid="80a032f2-8291-47e3-b29f-307723c14033"/>
-				<textFieldExpression><![CDATA[$P{ph1}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="190" y="707" width="66" height="20" uuid="719c9a7e-ca94-4aef-9a73-3ebcce65cb2a"/>
-				<textFieldExpression><![CDATA[$P{ph2}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="415" y="714" width="25" height="13" uuid="3bd98c82-72ca-4512-bf1b-002e61a4c4d4"/>
-				<text><![CDATA[العنوان]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="186" y="733" width="34" height="18" uuid="5c09faf1-dee9-4e44-b9fa-48918ae6d46e"/>
-				<text><![CDATA[Email]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="227" y="733" width="218" height="20" uuid="f7e17cd8-ee82-49c5-8140-5cec73888f04"/>
-				<textFieldExpression><![CDATA[$P{email}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

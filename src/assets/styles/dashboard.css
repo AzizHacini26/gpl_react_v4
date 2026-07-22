@@ -5,6 +5,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+  min-height: 100vh;
+  padding: var(--space-4) 0;
 }
 
 .page-header {
@@ -630,12 +632,49 @@
 
 .debts-summary {
   margin-bottom: var(--space-1);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+  .debts-summary {
+    grid-template-columns: 1fr;
+  }
 }
 
 .debt-dialog-form {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+}
+
+.debt-amount-input-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.debt-amount-input-row .p-inputtext {
+  flex: 1;
+  min-width: 0;
+}
+
+.debt-amount-preview {
+  white-space: nowrap;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  padding: 0.5rem 0.75rem;
+  background: var(--color-surface-alt, rgba(0, 0, 0, 0.04));
+  border-radius: 6px;
+  min-width: 100px;
+  text-align: center;
+}
+
+.debt-client-balance-hint {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--color-text-subtle);
 }
 
 .debt-dialog-row {
@@ -673,6 +712,111 @@
 
   .debt-dialog-actions .p-button {
     width: 100%;
+  }
+}
+
+.debt-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  flex: 1;
+  min-height: 0;
+}
+
+.debt-layout__clients,
+.debt-layout__details {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.debt-layout__clients .p-card-body,
+.debt-layout__details .p-card-body {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.debt-details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.debt-details-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.debt-details-balance {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.debt-details-balance__label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.debt-details-balance__value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.debt-balance--positive {
+  color: var(--color-danger);
+}
+
+.debt-balance--negative {
+  color: var(--color-success);
+}
+
+.debt-details-empty {
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: var(--space-8) 0;
+}
+
+.debt-client-amounts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.debt-client-debt {
+  font-weight: 700;
+  color: var(--color-danger);
+  font-size: 0.9rem;
+}
+
+.debt-client-paid {
+  font-weight: 600;
+  color: var(--color-success);
+  font-size: 0.8rem;
+}
+
+.debt-client-row--positive td {
+  background: rgba(220, 38, 38, 0.04) !important;
+}
+
+.debt-client-row--negative td {
+  background: rgba(5, 150, 105, 0.04) !important;
+}
+
+@media (max-width: 900px) {
+  .debt-layout {
+    grid-template-columns: 1fr;
   }
 }
 

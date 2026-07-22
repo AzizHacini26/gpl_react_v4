@@ -4,6 +4,7 @@ import { appRoutes } from '../app/appRoutes';
 import Login from '../pages/Login';
 import Denied from '../pages/Denied';
 import { AuthProvider, useAuth } from '../context/AuthContext';
+import { ThemeProvider } from '../context/ThemeContext';
 
 function RequireAuth() {
   const { isAuthenticated } = useAuth();
@@ -72,9 +73,11 @@ function AppRoutes() {
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <AppRoutes />
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

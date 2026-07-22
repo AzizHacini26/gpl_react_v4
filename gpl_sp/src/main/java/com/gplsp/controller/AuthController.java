@@ -45,7 +45,9 @@ public class AuthController {
         }
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-        final String jwt = jwtUtil.generateToken(userDetails);
+        final UserT user = userRepository.findByUsername(authenticationRequest.getUsername()).orElse(null);
+        final String role = user != null && user.getRoleT() != null ? user.getRoleT().getNom() : null;
+        final String jwt = jwtUtil.generateToken(userDetails, role);
 
         return ResponseEntity.ok(new AuthResponse(jwt));
     }
@@ -56,14 +58,15 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Username already exists");
         }
 
-        UserT user = new UserT();
-        user.setUsername(registerRequest.getUsername());
-        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        UserT newUser = new UserT();
+        newUser.setUsername(registerRequest.getUsername());
+        newUser.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 
-        userRepository.save(user);
+        userRepository.save(newUser);
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-        final String jwt = jwtUtil.generateToken(userDetails);
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(newUser.getUsername());
+        final String role = newUser.getRoleT() != null ? newUser.getRoleT().getNom() : null;
+        final String jwt = jwtUtil.generateToken(userDetails, role);
 
         return ResponseEntity.ok(new AuthResponse(jwt));
     }

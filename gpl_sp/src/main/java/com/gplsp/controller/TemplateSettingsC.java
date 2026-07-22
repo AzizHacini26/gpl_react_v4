@@ -3,17 +3,22 @@ package com.gplsp.controller;
 import com.gplsp.dto.CreateCustomTemplateRequest;
 import com.gplsp.dto.TemplateSelectionRequest;
 import com.gplsp.service.TemplateSettingsS;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -71,6 +76,30 @@ public class TemplateSettingsC {
         }
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(templateSettingsS.createCustomTemplate(authentication.getName(), request));
+    }
+
+    @GetMapping("/templates/{id}/image")
+    public ResponseEntity<Resource> getTemplateImage(@PathVariable Integer id) {
+        Resource resource = templateSettingsS.getTemplateImage(id);
+        if (resource == null) {
+            return ResponseEntity.notFound().build();
+        }
+        String contentType = "image/png";
+        try {
+            contentType = resource.getURL().openConnection().getContentType();
+        } catch (Exception ignored) {}
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
+
+    @PostMapping("/templates/{id}/image")
+    public ResponseEntity<Void> uploadTemplateImage(
+            @PathVariable Integer id,
+            @RequestParam("file") MultipartFile file) {
+        templateSettingsS.uploadTemplateImage(id, file);
+        return ResponseEntity.ok().build();
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(IllegalArgumentException.class)

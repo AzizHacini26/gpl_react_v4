@@ -1,0 +1,1 @@
+python sql_to_json.py clients.sql -o clients.json

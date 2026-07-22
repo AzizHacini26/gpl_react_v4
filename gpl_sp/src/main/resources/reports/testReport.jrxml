@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="525a40bc-e97c-4623-a6bd-64da8259f016">
+	<property name="ireport.zoom" value="1.2100000000000009"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="carnumb" class="java.lang.String"/>
+	<parameter name="instalateur" class="java.lang.String"/>
+	<parameter name="agrement" class="java.lang.String"/>
+	<parameter name="name" class="java.lang.String"/>
+	<parameter name="marque" class="java.lang.String"/>
+	<parameter name="tsalsely" class="java.lang.String"/>
+	<parameter name="tiraz" class="java.lang.String"/>
+	<parameter name="prod" class="java.lang.String"/>
+	<parameter name="sizenumb" class="java.lang.String"/>
+	<parameter name="du" class="java.lang.String"/>
+	<parameter name="days" class="java.lang.String"/>
+	<parameter name="ph1" class="java.lang.String"/>
+	<parameter name="ph2" class="java.lang.String"/>
+	<parameter name="email" class="java.lang.String"/>
+	<parameter name="id" class="java.lang.String"/>
+	<parameter name="adress" class="java.lang.String"/>
+	<parameter name="type" class="java.lang.String"/>
+	<parameter name="au" class="java.lang.String"/>
+	<detail>
+		<band height="304">
+			<staticText>
+				<reportElement mode="Transparent" x="50" y="122" width="442" height="106" forecolor="#000000" backcolor="#FFFFFF" uuid="e23ae024-743d-4638-9162-eff6314b62b7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="20" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/arial.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[نص عربي]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="106" y="64" width="100" height="20" uuid="dff70b11-36f7-431e-bf83-3f8f98876ac0"/>
+				<text><![CDATA[Test Report]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

@@ -178,6 +178,7 @@ export default function Permissions() {
       entityName="permission"
       columns={columns}
       renderDialog={renderDialog}
+      frozenActions
     />
   );
 }

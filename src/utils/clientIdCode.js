@@ -1,5 +1,5 @@
 const PRODUCT_YEAR_STORAGE_KEY = 'productYear';
-const IDCODE_PATTERN = /^\d+-\d{4}$/;
+const IDCODE_PATTERN = /^\d{4}-\d+$/;
 
 export function getSelectedProductYear() {
   const currentYear = new Date().getFullYear();
@@ -24,7 +24,7 @@ export function generateNextClientIdCode(clients, year) {
     const normalized = normalizeIdCode(client?.idcode);
     if (!normalized) return;
 
-    const [sequenceText, clientYear] = normalized.split('-');
+    const [clientYear, sequenceText] = normalized.split('-');
     if (clientYear !== yearText) return;
 
     const sequence = Number.parseInt(sequenceText, 10);
@@ -33,7 +33,7 @@ export function generateNextClientIdCode(clients, year) {
     }
   });
 
-  return `${maxSequence + 1}-${yearText}`;
+  return `${yearText}-${maxSequence + 1}`;
 }
 
 export function hasDuplicateIdCode(clients, idcode, currentClientId = null) {

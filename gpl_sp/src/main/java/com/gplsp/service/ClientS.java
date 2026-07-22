@@ -45,7 +45,8 @@ public class ClientS {
 
     private UserT getCurrentUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        if (username == null) return null;
+        if (username == null)
+            return null;
         return userR.findByUsername(username).orElse(null);
     }
 
@@ -308,13 +309,15 @@ public class ClientS {
     }
 
     private boolean intBool(Object obj) {
-        if (obj == null) return false;
+        if (obj == null)
+            return false;
         String s = obj.toString().trim();
         return "1".equals(s) || "true".equalsIgnoreCase(s);
     }
 
     private Date parseDate(String value) {
-        if (value == null || value.isBlank() || "-----".equals(value)) return null;
+        if (value == null || value.isBlank() || "-----".equals(value))
+            return null;
         try {
             return Date.valueOf(value);
         } catch (IllegalArgumentException e) {
@@ -323,9 +326,11 @@ public class ClientS {
     }
 
     private MultyTypesT resolveType(String nom, String type) {
-        if (nom == null || nom.isBlank()) return null;
+        if (nom == null || nom.isBlank())
+            return null;
         Optional<MultyTypesT> existing = multiTypesR.findByNom(nom);
-        if (existing.isPresent()) return existing.get();
+        if (existing.isPresent())
+            return existing.get();
         MultyTypesT mt = new MultyTypesT();
         mt.setNom(nom);
         mt.setType(type);
@@ -333,7 +338,8 @@ public class ClientS {
     }
 
     private String normalizeIdCode(String idcode) {
-        if (idcode == null) return null;
+        if (idcode == null)
+            return null;
         final String normalized = idcode.trim();
         return normalized.isEmpty() ? null : normalized;
     }
@@ -341,19 +347,19 @@ public class ClientS {
     public String getNextIdCode(int year) {
         UserT currentUser = getCurrentUser();
         if (currentUser == null) {
-            return "1-" + year;
+            return year + "-1";
         }
         return generateNextIdCode(currentUser, year);
     }
 
     private String generateNextIdCode(UserT user, int year) {
-        final String yearSuffix = "-" + year;
+        final String yearPrefix = year + "-";
         int maxSequence = 0;
 
         List<ClientT> userClients = user != null ? clientR.findByUser(user) : clientR.findAll();
         for (ClientT client : userClients) {
             final String candidate = normalizeIdCode(client.getIdcode());
-            if (candidate == null || !candidate.endsWith(yearSuffix)) {
+            if (candidate == null || !candidate.startsWith(yearPrefix)) {
                 continue;
             }
 
@@ -363,7 +369,7 @@ public class ClientS {
             }
 
             try {
-                final int sequence = Integer.parseInt(candidate.substring(0, separatorIndex));
+                final int sequence = Integer.parseInt(candidate.substring(separatorIndex + 1));
                 if (sequence > maxSequence) {
                     maxSequence = sequence;
                 }
@@ -371,6 +377,6 @@ public class ClientS {
             }
         }
 
-        return (maxSequence + 1) + yearSuffix;
+        return yearPrefix + (maxSequence + 1);
     }
 }

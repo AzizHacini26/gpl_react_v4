@@ -1,4 +1,4 @@
-import { useMemo, useRef, useCallback } from 'react';
+import { useState, useMemo, useRef, useCallback } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
@@ -8,16 +8,16 @@ import { Toast } from 'primereact/toast';
 import { Dialog } from 'primereact/dialog';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
-import { Calendar } from 'primereact/calendar';
+import { Divider } from 'primereact/divider';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
-import { Divider } from 'primereact/divider';
 import { useTranslation } from 'react-i18next';
 import { useDebts } from '../hooks/useDebts';
 import { useClients } from '../hooks/useClients';
+import { ClientService } from '../services/ClientService';
 import { hasPermission } from '../services/authApi';
-import { formatDZD } from '../utils/currency';
+import { formatDZD, parseAmount } from '../utils/currency';
 import { parseDateValue, dateFormatFR } from '../utils/helpers';
 import PageHeader from '../components/ui/PageHeader';
 import StatCard from '../components/ui/StatCard';
@@ -31,49 +31,102 @@ const STATUS_OPTIONS = [
 export default function Debts() {
   const { t } = useTranslation();
   const toast = useRef(null);
-  const canEdit = hasPermission('UPDATE_DEBT');
   const canDelete = hasPermission('DELETE_DEBT');
   const canCreate = hasPermission('ADD_DEBT');
 
-  const hook = useDebts();
+  const debtsHook = useDebts();
   const clientHook = useClients();
+
   const {
-    items, loading, saving, error, globalFilterValue,
-    showDialog, editingItem, formData,
-    loadItems, deleteItem, createItem, updateItem,
-    openCreateDialog, openEditDialog, closeDialog, updateFormData,
-    onGlobalFilterChange, clearFilters, footer,
-  } = hook;
+    items: allDebts,
+    loading: debtsLoading,
+    error: debtsError,
+    loadItems: loadDebts,
+    deleteItem,
+    createItem,
+  } = debtsHook;
 
-  const clientOptions = useMemo(() => clientHook.items.map((client) => ({
-    label: client.name,
-    value: client.id,
-    phone: client.phone,
-  })), [clientHook.items]);
+  const { items: allClients, loading: clientsLoading } = clientHook;
 
-  const summary = useMemo(() => {
-    const totalDebt = items
-      .filter((d) => d.status === 'دين')
-      .reduce((sum, d) => sum + (parseFloat(d.amount) || 0), 0);
-    const totalPaid = items
-      .filter((d) => d.status === 'تسديد')
-      .reduce((sum, d) => sum + (parseFloat(d.amount) || 0), 0);
-    return { totalDebt, totalPaid, balance: totalPaid - totalDebt, count: items.length };
-  }, [items]);
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [showQuickAddDialog, setShowQuickAddDialog] = useState(false);
+  const [quickAddMode, setQuickAddMode] = useState('debt');
+  const [quickAddForm, setQuickAddForm] = useState({ clientId: null, amount: '', purpose: '' });
+  const [quickAddClient, setQuickAddClient] = useState(null);
+  const [clientSearch, setClientSearch] = useState('');
+
+  const clientDebtSummary = useMemo(() => {
+    const map = {};
+    for (const debt of allDebts) {
+      const cid = debt.clientId;
+      if (!map[cid]) {
+        map[cid] = { clientId: cid, clientName: debt.clientName || '', phone: debt.phone || '', totalDebt: 0, totalPaid: 0, operations: 0 };
+      }
+      const amt = parseAmount(debt.amount);
+      map[cid].operations++;
+      if (debt.status === 'دين') map[cid].totalDebt += amt;
+      else if (debt.status === 'تسديد') map[cid].totalPaid += amt;
+    }
+    return Object.values(map);
+  }, [allDebts]);
+
+  const filteredClientList = useMemo(() => {
+    const q = clientSearch.trim().toLowerCase();
+    let list = clientDebtSummary;
+    if (q) {
+      list = list.filter((c) =>
+        c.clientName.toLowerCase().includes(q) ||
+        c.phone.includes(q)
+      );
+    }
+    return list.sort((a, b) => (b.totalDebt - b.totalPaid) - (a.totalDebt - a.totalPaid));
+  }, [clientDebtSummary, clientSearch]);
+
+  const selectedClientDebts = useMemo(() => {
+    if (!selectedClient) return [];
+    return allDebts
+      .filter((d) => d.clientId === selectedClient.clientId)
+      .sort((a, b) => {
+        const da = parseDateValue(a.dateInsert);
+        const db = parseDateValue(b.dateInsert);
+        if (da && db) return db.getTime() - da.getTime();
+        if (da) return -1;
+        if (db) return 1;
+        return 0;
+      });
+  }, [allDebts, selectedClient]);
+
+  const stats = useMemo(() => {
+    let totalDebt = 0;
+    let totalPaid = 0;
+    for (const d of allDebts) {
+      const amt = parseAmount(d.amount);
+      if (d.status === 'دين') totalDebt += amt;
+      else if (d.status === 'تسديد') totalPaid += amt;
+    }
+    const indebtedClients = clientDebtSummary.filter((c) => c.totalDebt > c.totalPaid).length;
+    return { totalDebt, totalPaid, indebtedClients };
+  }, [allDebts, clientDebtSummary]);
+
+  const clientDropdownOptions = useMemo(() =>
+    allClients.map((c) => ({ label: `${c.name} - ${c.phone}`, value: c.id, phone: c.phone, name: c.name })),
+    [allClients]
+  );
 
   const showToast = useCallback((severity, summary, detail) => {
     toast.current?.show({ severity, summary, detail, life: 3000 });
   }, []);
 
-  const handleDelete = useCallback((item) => {
+  const handleDeleteDebt = useCallback((debt) => {
     confirmDialog({
-      message: t('debts.confirmDeleteMessage', { name: item.clientName }),
+      message: t('debts.confirmDeleteMessage', { name: debt.clientName }),
       header: t('debts.confirmDelete'),
       icon: 'pi pi-exclamation-triangle',
       acceptClassName: 'p-button-danger',
       accept: async () => {
-        const result = await deleteItem(item.id);
+        const result = await deleteItem(debt.id);
         if (result.ok) {
+          await Promise.all([loadDebts(), clientHook.loadItems()]);
           showToast('success', t('debts.deleted'), t('debts.deletedSuccess'));
         } else {
           showToast('error', t('debts.deleteFailed'), result.error || t('debts.saveFailed'));
@@ -82,67 +135,110 @@ export default function Debts() {
     });
   }, [deleteItem, showToast, t]);
 
-  const handleSave = useCallback(async () => {
-    let result;
-    if (editingItem) {
-      result = await updateItem(editingItem.id, formData);
-    } else {
-      result = await createItem(formData);
+  const handleQuickAdd = useCallback(async () => {
+    const { clientId, amount, purpose } = quickAddForm;
+    const effectiveClientId = clientId || quickAddClient?.clientId;
+    if (!effectiveClientId || !amount) {
+      showToast('warn', t('common.error'), t('debts.amountPlaceholder'));
+      return;
     }
+    const client = allClients.find((c) => c.id === effectiveClientId) || quickAddClient;
+    const numAmount = parseFloat(parseAmount(amount));
+    if (quickAddMode === 'payment' && effectiveClientId) {
+      const summary = clientDebtSummary.find((c) => c.clientId === effectiveClientId);
+      const balance = summary ? summary.totalDebt - summary.totalPaid : 0;
+      if (numAmount > balance) {
+        showToast('warn', t('common.error'), t('debts.paymentExceedsBalance'));
+        return;
+      }
+    }
+    const payload = {
+      clientId: effectiveClientId,
+      clientName: client?.clientName || client?.name || '',
+      phone: client?.phone || '',
+      amount,
+      status: quickAddMode === 'debt' ? 'دين' : 'تسديد',
+      dateInsert: new Date().toISOString().split('T')[0],
+      prod: purpose || '',
+    };
+    const result = await createItem(payload);
     if (result.ok) {
-      showToast(
-        'success',
-        editingItem ? t('debts.updated') : t('debts.created'),
-        editingItem ? t('debts.updatedSuccess') : t('debts.createdSuccess'),
-      );
-      closeDialog();
+      await Promise.all([loadDebts(), clientHook.loadItems()]);
+      showToast('success', t('debts.created'), t('debts.createdSuccess'));
+      setShowQuickAddDialog(false);
+      setQuickAddForm({ clientId: null, amount: '', purpose: '' });
+      setQuickAddClient(null);
     } else {
       showToast('error', t('debts.saveFailed'), result.error || t('debts.saveFailed'));
     }
-  }, [closeDialog, createItem, editingItem, formData, showToast, updateItem, t]);
+  }, [quickAddForm, quickAddMode, quickAddClient, createItem, allClients, showToast, t, clientDebtSummary]);
 
-  const actionsTemplate = useCallback((rowData) => (
-    <div className="entity-table-actions">
-      {canEdit && <Button icon="pi pi-pencil" onClick={() => openEditDialog(rowData)} text rounded tooltip={t('debts.editTooltip')} />}
-      {canDelete && <Button icon="pi pi-trash" severity="danger" onClick={() => handleDelete(rowData)} text rounded tooltip={t('debts.deleteTooltip')} />}
-    </div>
-  ), [canEdit, canDelete, handleDelete, openEditDialog, t]);
-
-  const statusBodyTemplate = useCallback((rowData) => (
-    <span className={`debt-badge ${rowData.status === 'دين' ? 'debt-badge--pending' : 'debt-badge--paid'}`}>
-      <i className={`pi ${rowData.status === 'دين' ? 'pi-exclamation-triangle' : 'pi-check-circle'}`} />
-      {rowData.status}
-    </span>
-  ), []);
-
-  const amountBodyTemplate = useCallback((rowData) => (
-    <span className="debt-amount">{formatDZD(rowData.amount)}</span>
-  ), []);
-
-  const dateBodyTemplate = useCallback((rowData) => {
-    if (!rowData.dateInsert) return <span className="debt-date-empty">-</span>;
-    const d = parseDateValue(rowData.dateInsert);
-    if (!d) return <span>{rowData.dateInsert}</span>;
-    return <span className="debt-date">{dateFormatFR(rowData.dateInsert)}</span>;
+  const openQuickAdd = useCallback((mode, client = null) => {
+    setQuickAddMode(mode);
+    setQuickAddClient(client);
+    setQuickAddForm({ clientId: null, amount: '', purpose: '' });
+    setShowQuickAddDialog(true);
   }, []);
 
-  if (error) {
+  if (debtsError) {
     return (
       <div className="page-container">
-        <StatePanel
-          variant="error"
-          title={t('debts.loadError')}
-          message={error}
-          icon="pi pi-exclamation-triangle"
-          onRetry={loadItems}
-          retryLabel={t('common.retry')}
-        />
+        <StatePanel variant="error" title={t('debts.loadError')} message={debtsError} icon="pi pi-exclamation-triangle" onRetry={loadDebts} retryLabel={t('common.retry')} />
       </div>
     );
   }
 
-  const debtCount = items.filter((d) => d.status === 'دين').length;
-  const paidCount = items.filter((d) => d.status === 'تسديد').length;
+  const loading = debtsLoading || clientsLoading;
+
+  const clientRowClass = (rowData) => {
+    const balance = rowData.totalDebt - rowData.totalPaid;
+    if (balance > 0) return 'debt-client-row--positive';
+    if (balance < 0) return 'debt-client-row--negative';
+    return '';
+  };
+
+  const clientAmountTemplate = (rowData) => {
+    const balance = rowData.totalDebt - rowData.totalPaid;
+    return (
+      <div className="debt-client-amounts">
+        <span className="debt-client-debt">{formatDZD(rowData.totalDebt)}</span>
+        {rowData.totalPaid > 0 && <span className="debt-client-paid">- {formatDZD(rowData.totalPaid)}</span>}
+      </div>
+    );
+  };
+
+  const clientActionsTemplate = (rowData) => (
+    <div className="entity-table-actions">
+      <Button icon="pi pi-plus-circle" text rounded severity="danger" tooltip={t('debts.add')} onClick={(e) => { e.stopPropagation(); setSelectedClient(rowData); openQuickAdd('debt', rowData); }} />
+      <Button icon="pi pi-minus-circle" text rounded severity="success" tooltip={t('debts.totalPaid')} onClick={(e) => { e.stopPropagation(); setSelectedClient(rowData); openQuickAdd('payment', rowData); }} />
+    </div>
+  );
+
+  const debtStatusTemplate = (rowData) => (
+    <span className={`debt-badge ${rowData.status === 'دين' ? 'debt-badge--pending' : 'debt-badge--paid'}`}>
+      <i className={`pi ${rowData.status === 'دين' ? 'pi-exclamation-triangle' : 'pi-check-circle'}`} />
+      {rowData.status}
+    </span>
+  );
+
+  const debtAmountTemplate = (rowData) => (
+    <span className="debt-amount">{formatDZD(rowData.amount)}</span>
+  );
+
+  const debtDateTemplate = (rowData) => {
+    if (!rowData.dateInsert) return <span className="debt-date-empty">-</span>;
+    const d = parseDateValue(rowData.dateInsert);
+    if (!d) return <span>{rowData.dateInsert}</span>;
+    return <span className="debt-date">{dateFormatFR(rowData.dateInsert)}</span>;
+  };
+
+  const debtActionsTemplate = (rowData) => (
+    <div className="entity-table-actions">
+      {canDelete && <Button icon="pi pi-trash" severity="danger" text rounded tooltip={t('debts.deleteTooltip')} onClick={() => handleDeleteDebt(rowData)} />}
+    </div>
+  );
+
+  const selectedBalance = selectedClient ? selectedClient.totalDebt - selectedClient.totalPaid : 0;
 
   return (
     <div className="page-container">
@@ -152,163 +248,167 @@ export default function Debts() {
       <PageHeader
         title={t('debts.title')}
         subtitle={t('debts.subtitle')}
-        actions={(
-          <Button icon="pi pi-refresh" onClick={loadItems} outlined />
-        )}
+        actions={<Button icon="pi pi-refresh" onClick={loadDebts} outlined />}
       />
 
       <div className="stats-grid debts-summary">
-        <StatCard
-          label={t('debts.totalDebt')}
-          value={formatDZD(summary.totalDebt)}
-          meta={`${debtCount} ${t('debts.status')}`}
-          icon="pi pi-exclamation-circle"
-          variant="danger"
-        />
-        <StatCard
-          label={t('debts.totalPaid')}
-          value={formatDZD(summary.totalPaid)}
-          meta={`${paidCount} ${t('debts.totalPaid')}`}
-          icon="pi pi-check-circle"
-          variant="success"
-        />
-        <StatCard
-          label={t('debts.balance')}
-          value={formatDZD(summary.balance)}
-          meta={summary.balance >= 0 ? t('debts.positiveBalance') : t('debts.negativeBalance')}
-          icon="pi pi-wallet"
-          variant={summary.balance >= 0 ? 'info' : 'danger'}
-        />
-        <StatCard
-          label={t('debts.totalCount')}
-          value={summary.count}
-          meta={t('debts.allOperations')}
-          icon="pi pi-calculator"
-          variant="info"
-        />
+        <StatCard label={t('debts.totalDebt')} value={formatDZD(stats.totalDebt)} icon="pi pi-exclamation-circle" variant="danger" />
+        <StatCard label={t('debts.totalPaid')} value={formatDZD(stats.totalPaid)} icon="pi pi-check-circle" variant="success" />
+        <StatCard label={t('debts.totalCount')} value={stats.indebtedClients} meta={t('debts.allOperations')} icon="pi pi-users" variant="info" />
       </div>
 
-      <Card className="entity-card">
-        <Toolbar
-          left={() => (
-            <div className="entity-toolbar-group">
-              <Button severity="secondary" icon="pi pi-refresh" outlined onClick={loadItems} />
-              {canCreate && (
-                <Button severity="success" icon="pi pi-plus" label={t('debts.add')} onClick={openCreateDialog} />
-              )}
-            </div>
-          )}
-          right={() => (
-            <div className="entity-toolbar-group entity-toolbar-group-right">
-              <IconField iconPosition="left">
-                <InputIcon className="pi pi-search" />
-                <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder={t('debts.search')} />
-              </IconField>
-              <Button severity="contrast" icon="pi pi-filter-slash" outlined onClick={clearFilters} tooltip={t('common.retry')} />
-            </div>
-          )}
-          className="mb-3"
-        />
+      <div className="debt-layout">
+        <Card className="debt-layout__clients">
+          <Toolbar
+            left={() => (
+              <div className="entity-toolbar-group">
+                <IconField iconPosition="left">
+                  <InputIcon className="pi pi-search" />
+                  <InputText value={clientSearch} onChange={(e) => setClientSearch(e.target.value)} placeholder={t('debts.search')} />
+                </IconField>
+                {canCreate && (
+                  <>
+                    <Button severity="danger" icon="pi pi-plus" label={t('debts.add')} onClick={() => openQuickAdd('debt')} />
+                    <Button severity="success" icon="pi pi-minus" label={t('debts.totalPaid')} onClick={() => openQuickAdd('payment')} />
+                  </>
+                )}
+              </div>
+            )}
+            className="mb-3"
+          />
+          <DataTable
+            className="entity-data-table"
+            paginator
+            rows={10}
+            rowsPerPageOptions={[5, 10, 25]}
+            value={filteredClientList}
+            loading={loading}
+            dataKey="clientId"
+            selectionMode="single"
+            selection={selectedClient}
+            onSelectionChange={(e) => setSelectedClient(e.value)}
+            rowClassName={clientRowClass}
+            sortField="totalDebt"
+            sortOrder={-1}
+            showGridlines
+            removableSort
+            emptyMessage={t('debts.empty')}
+            scrollable
+            scrollHeight="flex"
+            size="small"
+          >
+            <Column field="clientName" header={t('debts.client')} sortable style={{ minWidth: '10rem' }} />
+            <Column field="phone" header={t('debts.phone')} sortable style={{ width: '8rem' }} />
+            <Column header={t('debts.amount')} body={clientAmountTemplate} style={{ width: '10rem' }} />
+            <Column header={t('debts.actions')} body={clientActionsTemplate} style={{ width: '6rem' }} />
+          </DataTable>
+        </Card>
 
-        <DataTable
-          className="entity-data-table"
-          paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]}
-          value={items} loading={loading} dataKey="id"
-          globalFilterFields={['clientName', 'phone', 'amount', 'status']}
-          sortField="id" sortOrder={-1} showGridlines removableSort
-          footer={footer}
-          emptyMessage={t('debts.empty')}
-          scrollable scrollHeight="calc(100vh - 35rem)" size="small"
-        >
-          <Column field="clientName" header={t('debts.client')} sortable style={{ minWidth: '12rem' }} />
-          <Column field="phone" header={t('debts.phone')} sortable style={{ width: '10rem' }} />
-          <Column field="amount" header={t('debts.amount')} sortable body={amountBodyTemplate} style={{ width: '10rem' }} />
-          <Column field="status" header={t('debts.status')} sortable body={statusBodyTemplate} style={{ width: '8rem' }} />
-          <Column field="dateInsert" header={t('debts.date')} sortable body={dateBodyTemplate} style={{ width: '10rem' }} />
-          <Column header={t('debts.actions')} body={actionsTemplate} style={{ width: '8rem' }} />
-        </DataTable>
-      </Card>
+        <Card className="debt-layout__details">
+          <div className="debt-details-header">
+            <h3 className="debt-details-title">
+              {selectedClient ? `${selectedClient.clientName}` : t('debts.allOperations')}
+            </h3>
+            {selectedClient && (
+              <div className="debt-details-balance">
+                <span className="debt-details-balance__label">{t('debts.balance')}:</span>
+                <span className={`debt-details-balance__value ${selectedBalance > 0 ? 'debt-balance--positive' : selectedBalance < 0 ? 'debt-balance--negative' : ''}`}>
+                  {formatDZD(selectedBalance)}
+                </span>
+              </div>
+            )}
+          </div>
+          {!selectedClient && (
+            <p className="debt-details-empty">{t('select_client_to_view_history')}</p>
+          )}
+          {selectedClient && (
+            <DataTable
+              className="entity-data-table"
+              paginator
+              rows={10}
+              rowsPerPageOptions={[5, 10, 25]}
+              value={selectedClientDebts}
+              dataKey="id"
+              sortField="dateInsert"
+              sortOrder={-1}
+              showGridlines
+              removableSort
+              emptyMessage={t('debts.empty')}
+              scrollable
+              scrollHeight="flex"
+              size="small"
+            >
+              <Column field="amount" header={t('debts.amount')} body={debtAmountTemplate} sortable style={{ width: '8rem' }} />
+              <Column field="prod" header={t('debts.purpose')} body={(r) => r.prod || '-'} style={{ minWidth: '8rem' }} />
+              <Column field="dateInsert" header={t('debts.date')} body={debtDateTemplate} sortable style={{ width: '9rem' }} />
+              <Column field="status" header={t('debts.status')} body={debtStatusTemplate} sortable style={{ width: '7rem' }} />
+              {canDelete && <Column header={t('debts.actions')} body={debtActionsTemplate} style={{ width: '4rem' }} />}
+            </DataTable>
+          )}
+        </Card>
+      </div>
 
       <Dialog
-        header={editingItem ? t('debts.headerEdit') : t('debts.headerCreate')}
-        visible={showDialog}
-        style={{ width: '35rem', maxWidth: 'calc(100vw - 1rem)' }}
+        header={quickAddMode === 'debt' ? t('debts.add') : t('debts.totalPaid')}
+        visible={showQuickAddDialog}
+        style={{ width: '30rem', maxWidth: 'calc(100vw - 1rem)' }}
         modal
-        onHide={closeDialog}
+        onHide={() => setShowQuickAddDialog(false)}
       >
         <div className="debt-dialog-form">
-          <div className="field">
-            <label htmlFor="clientSelect">{t('debts.client')} <span className="text-red-500">*</span></label>
-            <Dropdown
-              id="clientSelect"
-              value={formData.clientId || null}
-              options={clientOptions}
-              onChange={(e) => {
-                updateFormData('clientId', e.value);
-                const selected = clientOptions.find((o) => o.value === e.value);
-                if (selected) updateFormData('phone', selected.phone || '');
-              }}
-              placeholder={t('debts.clientPlaceholder')}
-              showClear
-            />
-          </div>
-
-          <div className="debt-dialog-row">
+          {quickAddClient ? (
             <div className="field">
-              <label htmlFor="phoneInput">{t('debts.phone')} <span className="text-red-500">*</span></label>
-              <InputText
-                id="phoneInput"
-                value={formData.phone || ''}
-                onChange={(e) => updateFormData('phone', e.target.value)}
-                placeholder={t('debts.phonePlaceholder')}
-                inputMode="tel"
+              <label>{t('debts.client')}</label>
+              <InputText value={`${quickAddClient.clientName} - ${quickAddClient.phone}`} disabled />
+              {quickAddMode === 'payment' && (
+                <small className="debt-client-balance-hint">
+                  {t('debts.balance')}: <strong>{formatDZD(quickAddClient.totalDebt - quickAddClient.totalPaid)}</strong>
+                </small>
+              )}
+            </div>
+          ) : (
+            <div className="field">
+              <label>{t('debts.client')} *</label>
+              <Dropdown
+                value={quickAddForm.clientId}
+                options={clientDropdownOptions}
+                onChange={(e) => setQuickAddForm((prev) => ({ ...prev, clientId: e.value }))}
+                placeholder={t('debts.clientPlaceholder')}
+                filter
+                showClear
               />
             </div>
-            <div className="field">
-              <label htmlFor="amountInput">{t('debts.amount')} <span className="text-red-500">*</span></label>
+          )}
+          <div className="field">
+            <label>{t('debts.amount')} *</label>
+            <div className="debt-amount-input-row">
               <InputText
-                id="amountInput"
-                value={formData.amount || ''}
-                onChange={(e) => updateFormData('amount', e.target.value)}
+                value={quickAddForm.amount}
+                onChange={(e) => setQuickAddForm((prev) => ({ ...prev, amount: e.target.value }))}
                 placeholder={t('debts.amountPlaceholder')}
                 inputMode="numeric"
               />
+              {quickAddForm.amount && (
+                <span className="debt-amount-preview">{formatDZD(quickAddForm.amount)}</span>
+              )}
             </div>
           </div>
-
-          <div className="debt-dialog-row">
-            <div className="field">
-              <label htmlFor="statusSelect">{t('debts.status')} <span className="text-red-500">*</span></label>
-              <Dropdown
-                id="statusSelect"
-                value={formData.status || null}
-                options={STATUS_OPTIONS}
-                onChange={(e) => updateFormData('status', e.value)}
-                placeholder={t('debts.statusPlaceholder')}
-              />
-            </div>
-            <div className="field">
-              <label htmlFor="dateCalendar">{t('debts.date')}</label>
-              <Calendar
-                id="dateCalendar"
-                value={formData.dateInsert ? parseDateValue(formData.dateInsert) : null}
-                onChange={(e) => updateFormData('dateInsert', e.value ? e.value.toISOString().split('T')[0] : '')}
-                dateFormat="dd/mm/yy"
-                showIcon
-                placeholder={t('debts.datePlaceholder')}
-              />
-            </div>
+          <div className="field">
+            <label>{t('debts.purpose')}</label>
+            <InputText
+              value={quickAddForm.purpose}
+              onChange={(e) => setQuickAddForm((prev) => ({ ...prev, purpose: e.target.value }))}
+              placeholder={t('debts.purpose')}
+            />
           </div>
-
           <Divider />
-
           <div className="debt-dialog-actions">
-            <Button label={t('debts.cancel')} icon="pi pi-times" outlined onClick={closeDialog} disabled={saving} />
+            <Button label={t('debts.cancel')} icon="pi pi-times" outlined onClick={() => setShowQuickAddDialog(false)} />
             <Button
-              label={saving ? t('debts.saving') : editingItem ? t('debts.update') : t('debts.save')}
-              icon={saving ? 'pi pi-spin pi-spinner' : editingItem ? 'pi pi-check' : 'pi pi-save'}
-              onClick={handleSave}
-              loading={saving}
+              label={quickAddMode === 'debt' ? t('debts.add') : t('debts.totalPaid')}
+              icon={quickAddMode === 'debt' ? 'pi pi-plus' : 'pi pi-check'}
+              onClick={handleQuickAdd}
+              severity={quickAddMode === 'debt' ? 'danger' : 'success'}
             />
           </div>
         </div>

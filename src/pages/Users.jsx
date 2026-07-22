@@ -150,6 +150,7 @@ export default function Users() {
       columns={columns}
       // استخدم renderDialog بدلاً من dialogFields
       renderDialog={renderUserDialog}
+      frozenActions
     />
   );
 }

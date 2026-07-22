@@ -73,6 +73,11 @@ body {
   color: #7f1d1d;
 }
 
+.p-datatable .row-rest-days-low > td {
+  background-color: #e0f2fe !important;
+  color: #0c4a6e;
+}
+
 .p-datatable .row-sent > td {
   background-color: #fef9c3 !important;
   color: #713f12;
@@ -180,9 +185,13 @@ body {
   justify-content: flex-end;
 }
 
-.entity-toolbar-group .p-icon-field,
-.entity-toolbar-group .p-inputtext {
-  max-width: 100%;
+.entity-toolbar-group .p-icon-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.entity-toolbar-group .p-icon-field .p-inputtext {
+  width: 100%;
 }
 
 .entity-data-table {
@@ -417,4 +426,215 @@ body {
   display: flex;
   align-items: center;
   margin-top: 0.5rem;
+}
+
+/* Add Client Full Page */
+.add-client-page {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.add-client-card {
+  background: var(--surface-card, #fff);
+  border-radius: var(--radius-md, 8px);
+  padding: 2rem;
+  width: 100%;
+  max-width: 960px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.add-client-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.add-client-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.add-client-field label {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.add-client-field .p-inputtext,
+.add-client-field .p-dropdown,
+.add-client-field .p-calendar {
+  width: 100%;
+}
+
+@media (max-width: 700px) {
+  .add-client-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .add-client-card {
+    padding: 1rem;
+  }
+}
+
+/* Dark mode overrides */
+[data-theme="dark"] .p-datatable .p-datatable-tbody > tr {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .p-datatable .p-datatable-tbody > tr > td {
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .p-datatable .p-datatable-thead > tr > th {
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .p-datatable .p-datatable-tbody > tr:hover {
+  background: var(--color-surface-muted);
+}
+
+[data-theme="dark"] .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+  background: var(--color-surface-muted);
+}
+
+[data-theme="dark"] .p-card {
+  background: var(--color-surface-elevated);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .p-toolbar {
+  background: var(--color-surface-elevated);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .p-inputtext,
+[data-theme="dark"] .p-dropdown,
+[data-theme="dark"] .p-calendar,
+[data-theme="dark"] .p-autocomplete input,
+[data-theme="dark"] .p-inputnumber input,
+[data-theme="dark"] .p-select {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .p-dialog {
+  background: var(--color-surface-elevated);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .p-dialog .p-dialog-header {
+  background: var(--color-surface-elevated);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .p-dialog .p-dialog-content {
+  background: var(--color-surface-elevated);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .p-dropdown-panel,
+[data-theme="dark"] .p-autocomplete-panel {
+  background: var(--color-surface-elevated);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .p-dropdown-items .p-dropdown-item {
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .p-dropdown-items .p-dropdown-item:hover {
+  background: var(--color-surface-muted);
+}
+
+[data-theme="dark"] .p-datepicker {
+  background: var(--color-surface-elevated);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .p-datatable .p-datatable-tbody > tr.p-highlight {
+  background: var(--color-primary-100);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .p-paginator {
+  background: var(--color-surface-elevated);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .p-column-filter .p-inputtext {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .p-tag {
+  background: var(--color-primary-100);
+  color: var(--color-primary-700);
+}
+
+[data-theme="dark"] .p-divider {
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .p-button.p-button-outlined {
+  color: var(--color-primary-700);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .p-confirm-dialog {
+  background: var(--color-surface-elevated);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .p-confirm-dialog .p-dialog-content {
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .p-message {
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .stats-grid .ui-card {
+  background: var(--color-surface-elevated);
+}
+
+[data-theme="dark"] .entity-card {
+  background: var(--color-surface-elevated);
+}
+
+[data-theme="dark"] .add-client-card {
+  background: var(--color-surface-elevated);
+}
+
+[data-theme="dark"] .p-inputswitch .p-inputswitch-slider {
+  background: var(--color-border-strong);
+}
+
+[data-theme="dark"] .p-inputswitch.p-highlight .p-inputswitch-slider {
+  background: var(--color-primary-500);
+}
+
+[data-theme="dark"] .p-datatable .row-rest-days-expired > td {
+  background: var(--color-danger-bg) !important;
+  color: var(--color-danger);
+}
+
+[data-theme="dark"] .p-datatable .row-rest-days-low > td {
+  background: #081331 !important;
+  color: var(--color-info);
+}
+
+[data-theme="dark"] .p-datatable .row-sent > td {
+  background: var(--color-warning-bg) !important;
+  color: var(--color-warning);
 }

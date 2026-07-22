@@ -11,9 +11,18 @@ import com.gplsp.repository.DocumentTypeR;
 import com.gplsp.repository.ReportTemplateR;
 import com.gplsp.repository.UserR;
 import com.gplsp.repository.UserTemplateSelectionR;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -29,6 +38,9 @@ public class TemplateSettingsS {
     private final UserTemplateSelectionR userTemplateSelectionR;
     private final UserR userR;
 
+    @Value("${app.upload.dir:uploads/template-images}")
+    private String uploadDir;
+
     public TemplateSettingsS(
             DocumentTypeR documentTypeR,
             ReportTemplateR reportTemplateR,
@@ -38,6 +50,51 @@ public class TemplateSettingsS {
         this.reportTemplateR = reportTemplateR;
         this.userTemplateSelectionR = userTemplateSelectionR;
         this.userR = userR;
+    }
+
+    public Resource getTemplateImage(Integer templateId) {
+        ReportTemplateT template = reportTemplateR.findById(templateId)
+                .orElseThrow(() -> new IllegalArgumentException("Template not found: " + templateId));
+        if (template.getImagePath() == null || template.getImagePath().isBlank()) {
+            return null;
+        }
+        Path filePath = Paths.get(template.getImagePath());
+        if (!Files.exists(filePath)) {
+            return null;
+        }
+        return new FileSystemResource(filePath);
+    }
+
+    @Transactional
+    public void uploadTemplateImage(Integer templateId, MultipartFile file) {
+        if (file.isEmpty()) {
+            throw new IllegalArgumentException("File is empty");
+        }
+        String contentType = file.getContentType();
+        if (contentType == null || !contentType.startsWith("image/")) {
+            throw new IllegalArgumentException("Only image files are allowed");
+        }
+
+        ReportTemplateT template = reportTemplateR.findById(templateId)
+                .orElseThrow(() -> new IllegalArgumentException("Template not found: " + templateId));
+        try {
+            Path uploadPath = Paths.get(uploadDir).toAbsolutePath().normalize();
+            Files.createDirectories(uploadPath);
+
+            String extension = "";
+            String originalName = file.getOriginalFilename();
+            if (originalName != null && originalName.contains(".")) {
+                extension = originalName.substring(originalName.lastIndexOf("."));
+            }
+            String filename = templateId + extension;
+            Path targetPath = uploadPath.resolve(filename);
+            Files.copy(file.getInputStream(), targetPath, StandardCopyOption.REPLACE_EXISTING);
+
+            template.setImagePath(targetPath.toString());
+            reportTemplateR.save(template);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to store image: " + e.getMessage(), e);
+        }
     }
 
     public List<Map<String, Object>> getDocumentTypes() {
@@ -179,6 +236,7 @@ public class TemplateSettingsS {
         row.put("sourceType", template.getSourceType().name());
         row.put("documentTypeCode", template.getDocumentType().getCode());
         row.put("defaultTemplate", template.isDefaultTemplate());
+        row.put("hasImage", template.getImagePath() != null && !template.getImagePath().isBlank());
         return row;
     }
 

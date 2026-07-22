@@ -12,11 +12,13 @@ import { appRoutes } from '../app/appRoutes';
 import { useAuth } from '../hooks/useAuth';
 import { APP_VERSION } from '../utils/version';
 import { AuditService } from '../services/AuditService';
+import { useTheme } from '../context/ThemeContext';
 
 const ROUTE_TRANSLATION_KEYS = {
   '/': 'routes.home',
   '/users': 'routes.users',
   '/clients': 'routes.clients',
+  '/add-client': 'routes.addClient',
   '/ClientsNotSent': 'routes.clientsNotSent',
   '/clientcards': 'routes.clientCards',
   '/account': 'routes.account',
@@ -35,6 +37,7 @@ function SidebarLayout() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { hasPermission } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const languageMenuRef = useRef(null);
   const notifPanelRef = useRef(null);
   const sidebarRef = useRef(null);
@@ -120,7 +123,7 @@ function SidebarLayout() {
   const navLinkStyle = ({ isActive }) => ({
     textDecoration: 'none',
     color: isActive ? '#ffffff' : 'var(--color-text)',
-    background: isActive ? 'var(--color-primary-600)' : 'transparent',
+    background: isActive ? '#0d9488' : 'transparent',
     borderRadius: 'var(--radius-sm)',
     padding: '10px',
     fontWeight: 600,
@@ -190,7 +193,7 @@ function SidebarLayout() {
               title={!isExpanded ? getRouteLabel(route) : undefined}
             >
               {route.icon && <span className={route.icon} aria-hidden="true" />}
-              {isExpanded && <span>{getRouteLabel(route)}</span>}
+              <span className="sidebar-nav-label">{getRouteLabel(route)}</span>
             </NavLink>
           ))}
         </nav>
@@ -292,6 +295,17 @@ function SidebarLayout() {
             </Button>
 
             <Menu model={languageItems} popup ref={languageMenuRef} />
+            <Button
+              type="button"
+              icon={theme === 'dark' ? 'pi pi-sun' : 'pi pi-moon'}
+              className="topbar-btn"
+              text
+              rounded
+              aria-label="Toggle theme"
+              tooltip={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+              tooltipOptions={{ position: 'bottom' }}
+              onClick={toggleTheme}
+            />
             <Button
               type="button"
               icon="pi pi-language"

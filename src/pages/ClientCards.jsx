@@ -9,7 +9,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { MultiTypesService } from '../services/MultiTypesService';
 import { useState, useEffect, useMemo, useRef } from 'react';
  import { Calendar } from 'primereact/calendar';
- import { classNames } from 'primereact/utils';
+
 import { Toast } from 'primereact/toast';
 import {
   generateNextClientIdCode,
@@ -120,17 +120,26 @@ function useClientsWithRestDays() {
 
   const moneyBodyTemplate = (rowData) => {
     const amount = parseAmount(rowData.moneyy);
-    const moneyClassName = classNames('money-badge', {
-      'money-badge-low': amount <= 0,
-      'money-badge-medium': amount > 0 && amount < 1000,
-      'money-badge-high': amount >= 1000,
-    });
-
-    return <span className={moneyClassName}>{formatDZD(amount)}</span>;
+    if (!amount) return <span>{formatDZD(amount)}</span>;
+    return (
+      <span
+        style={{
+          display: 'inline-block',
+          padding: '0.25rem 0.6rem',
+          borderRadius: '6px',
+          backgroundColor: '#fdecea',
+          color: '#b71c1c',
+          fontWeight: 600,
+        }}
+      >
+        {formatDZD(amount)}
+      </span>
+    );
   };
 
   const restDaysBodyTemplate = (rowData) => {
-    return rowData.restDays ?? '-';
+    if (rowData.restDays == null) return '-';
+    return <span dir="ltr">{rowData.restDays}</span>;
   };
 
   const clientRowClassName = (rowData) => {
@@ -174,7 +183,7 @@ function useClientsWithRestDays() {
             <InputText
               value={formData.idcode || ''}
               onChange={(e) => onFormChange('idcode', e.target.value)}
-              placeholder={`Auto: 1-${productYear}`}
+              placeholder={`Auto: ${productYear}-1`}
             />
             
             <label><strong>Phone *</strong></label>
@@ -252,7 +261,7 @@ function useClientsWithRestDays() {
     const resolvedIdCode = manualIdCode || generateNextClientIdCode(idCodeSource, productYear);
 
     if (!isValidIdCodeFormat(resolvedIdCode)) {
-      window.alert('ID Code must use this format: number-year (example: 1-2026).');
+      window.alert('ID Code must use this format: year-number (example: 2026-1).');
       return false;
     }
 
@@ -413,11 +422,12 @@ function useClientsWithRestDays() {
         title="Clients"
         entityName="client"
         columns={columns}
+        frozenActions
         rowActions={[
          
           {
             key: 'Dates',
-            label: 'Dates',
+          
             icon: 'pi pi-calendar-plus',
             severity: 'info',
             onClick: (rowData) => {
@@ -438,21 +448,7 @@ function useClientsWithRestDays() {
         rowClassName={clientRowClassName}
         rightToolbarExtras={
           <>
-            <Button
-              type="button"
-              severity="help"
-              icon="pi pi-check-square"
-              label="Select All"
-              onClick={() => setSelectedClients(clientHook.items)}
-            />
-            <Button
-              type="button"
-              severity="secondary"
-              icon="pi pi-times"
-              label="Clear Selection"
-              outlined
-              onClick={() => setSelectedClients([])}
-            />
+            
              <Button
               type="button"
               severity="secondary"

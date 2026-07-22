@@ -57,4 +57,25 @@ export const TemplateSettingsService = {
     }
     return response.json();
   },
+
+  getTemplateImageUrl: (id) => `${API_URL}/templates/${id}/image`,
+
+  fetchTemplateImageBlob: async (id) => {
+    const response = await apiFetch(`${API_URL}/templates/${id}/image`);
+    if (!response.ok) return null;
+    return response.blob();
+  },
+
+  uploadTemplateImage: async (id, file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await apiFetch(`${API_URL}/templates/${id}/image`, {
+      method: 'POST',
+      body: formData,
+    });
+    if (!response.ok) {
+      const message = await response.text().catch(() => '');
+      throw new Error(message || 'Failed to upload image');
+    }
+  },
 };

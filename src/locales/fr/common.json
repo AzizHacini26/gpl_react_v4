@@ -1,6 +1,19 @@
 ﻿{
 
   "common": {
+    "search": "Rechercher...",
+    "noData": "Aucune donnée disponible",
+    "noDataMessage": "Aucune donnée n'a été trouvée.",
+    "noDataAction": "Ajouter un nouvel élément",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "confirmDeleteTitle": "Confirmer la suppression",
+    "confirmDeleteMessage": "Êtes-vous sûr de vouloir supprimer cet élément ?",
+    "deleted": "Supprimé",
+    "deletedSuccess": "Élément supprimé avec succès",
+    "deleteFailed": "Échec de suppression",
     "loading": "Chargement",
     "loadingData": "Recuperation des donnees...",
     "error": "Une erreur est survenue",
@@ -9,9 +22,9 @@
     "lastTingime5": "Fin de validité",
     "table": {
       "id": "ID",
-      "idCode": "Numéro de dossier",
+      "idCode": "N° dossier",
       "name": "Nom",
-      "phone": "Téléphone",
+      "phone": "Phone",
       "username": "Nom d'utilisateur",
       "role": "Rôle",
       "activated": "Activé",
@@ -53,13 +66,14 @@
   "app": {
     "title": "GPL DZ",
     "language": "Langue",
-    "developerTeam": "Equipe de developpement",
-    "copyright": "GPL DZ (c) 2026"
+    "developerTeam": "By Hacini Mohammed Abdelaziz",
+    "copyright": "(c) 2026"
   },
   "routes": {
     "home": "Accueil",
     "users": "Utilisateurs",
     "clients": "Clients",
+    "addClient": "Ajouter Client",
     "clientsNotSent": "Clients sans carte",
     "clientCards": "Cartes clients",
     "account": "",
@@ -89,7 +103,9 @@
     "productYearLabel": "Choisir l'annee de Money",
     "selectProductYear": "Selectionner l'annee",
     "templateSelectionTitle": "Selection de modele par type de document",
-    "selectTemplate": "Selectionner un modele"
+    "selectTemplate": "Selectionner un modele",
+    "clientDefaultsTitle": "Valeurs par defaut pour l'ajout de client",
+    "clientDefaultsDesc": "Ces valeurs seront pre-remplies lors de l'ajout d'un nouveau client."
   },
   "language": {
     "ar": "Arabe",
@@ -110,7 +126,7 @@
     "searchDefault": "Rechercher...",
     "searchGeneric": "Rechercher dans {{entity}}...",
     "emptyGeneric": "Aucun element {{entity}} trouve.",
-    "addGeneric": "Ajouter {{entity}}",
+    "addGeneric": "Ajouter",
     "edit": "Modifier",
     "delete": "Supprimer",
     "confirmDeleteTitle": "Confirmer la suppression",
@@ -126,7 +142,7 @@
     "saveFailed": "Echec d'enregistrement",
     "couldNotSave": "Impossible d'enregistrer {{entity}}",
     "add": {
-      "client": "Ajouter client"
+      "client": "Ajouter"
     },
     "search": {
       "client": "Rechercher dans les clients..."
@@ -189,7 +205,7 @@
     "companyInfoSubtitle": "Donnees de l'entreprise liee a votre compte",
     "name": "Nom",
     "username": "Nom d'utilisateur",
-    "phone": "Telephone",
+    "phone": "Phone",
     "role": "Role",
     "activated": "Active",
     "notActivated": "Non active",
@@ -244,6 +260,7 @@
     "totalDebt": "Total des dettes",
     "totalPaid": "Total des paiements",
     "balance": "Solde",
+    "paymentExceedsBalance": "Le paiement ne peut pas dépasser le solde",
     "totalCount": "Total des opérations",
     "positiveBalance": "Solde positif",
     "negativeBalance": "Solde négatif",
@@ -252,7 +269,7 @@
     "edit": "Modifier la dette",
     "create": "Nouvelle dette",
     "client": "Client",
-    "phone": "Téléphone",
+    "phone": "Phone",
     "amount": "Montant",
     "status": "Statut",
     "date": "Date",
@@ -282,7 +299,8 @@
     "save": "Ajouter",
     "update": "Mettre à jour",
     "headerEdit": "Modifier la dette",
-    "headerCreate": "Nouvelle dette"
+    "headerCreate": "Nouvelle dette",
+    "purpose": "Objet"
   },
   "clientErp": {
     "title": "Base de données clients",
@@ -296,10 +314,17 @@
     "clearSelection": "Effacer la sélection",
     "createTitle": "Ajouter"
   },
+  "select_client_to_view_history": "Sélectionner un client pour voir l'historique",
   "client": {
-  "docNumb": "Numéro de dossier",
+  "docNumb": "N° dossier",
+  "fullName": "Nom complet",
+  "editTitle": "Modifier le client",
+  "yearLabel": "Année",
   "name": "Nom",
-  "phone": "Téléphone",
+  "phone": "Phone",
+  "tiraz": "Tiraz",
+  "tasalaly": "Tasalaly",
+  "carnumb": "N° voiture",
   "tproduct": "Année de fabrication",
   "tverify": "Date de contrôle",
   "lastTanjime": "Dernier remplissage",
@@ -308,9 +333,26 @@
   "battlenumb": "Numéro de bouteille",
   "moneyy": "Montant",
   "marque": "Marque",
+  "batteltype": "Type de bouteille",
   "duree": "Durée",
+  "size": "Taille",
+  "cartype": "Type de voiture",
   "state": "État",
+  "domicile": "Domicile",
+  "doc": "Document",
   "datestart": "Date de début de carte",
-  "dateend": "Date de fin de carte"
+  "dateend": "Date de fin de carte",
+  "sectionBasic": "Informations de base",
+  "sectionAdditional": "Informations complémentaires",
+  "selectMarque": "Sélectionner la marque",
+  "selectBatteltype": "Sélectionner le type",
+  "selectDays": "Sélectionner la durée",
+  "selectSize": "Sélectionner la taille",
+  "selectCartype": "Sélectionner le type",
+  "selectState": "Sélectionner l'état",
+  "selectDomicile": "Sélectionner le domicile",
+  "selectDoc": "Sélectionner le document",
+  "sizeType": "Type de taille",
+  "selectSizeType": "Sélectionner le type de taille"
 }
 }

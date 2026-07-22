@@ -50,4 +50,7 @@ public class ReportTemplateT {
     @ManyToOne
     @JoinColumn(name = "created_by_user_id")
     private UserT createdBy;
+
+    @Column(length = 255)
+    private String imagePath;
 }

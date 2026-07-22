@@ -82,6 +82,7 @@ function Roles() {
       columns={columns}
       dialogFields={dialogFields}
       globalFilterFields={['nom', 'permissionsText']}
+      frozenActions
     />
   );
 }

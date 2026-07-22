@@ -10,12 +10,15 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"nom", "type"})
+})
 public class MultyTypesT {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(length = 70, unique = true)
+    @Column(length = 70)
     private String nom;
 
     @Column(length = 50)

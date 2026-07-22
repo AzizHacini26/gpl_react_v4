@@ -1,5 +1,17 @@
 ﻿{
   "common": {
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "confirm": "تأكيد",
+    "search": "بحث",
+    "clear": "مسح",
+    "add": "إضافة",
+    "update": "تحديث",
+    "create": "إنشاء",
+    "back": "رجوع",
+    "actions": "الإجراءات",
     "loading": "جاري التحميل",
     "loadingData": "يتم جلب البيانات...",
     "error": "حدث خطأ",
@@ -50,16 +62,17 @@
     }
   },
   "app": {
-    "title": "كود كوم GPL",
+    "title": "GPL DZ",
     "language": "اللغة",
-    "developerTeam": "فريق التطوير",
-    "copyright": "GPL DZ (c) 2026"
+    "developerTeam": "2026 (c) Hacini Mohammed Abdelaziz",
+    "copyright": ""
   },
   "routes": {
     "home": "الرئيسية",
     "users": "المستخدمون",
     "clients": "الزبائن",
-    "clientsNotSent": "الزبائن غير المرسلين",
+    "addClient": "إضافة زبون",
+    "clientsNotSent": "الزبائن بدون بطاقة",
     "clientCards": "بطاقات الزبائن",
     "account": "الحساب",
     "logout": "تسجيل الخروج",
@@ -88,7 +101,9 @@
     "productYearLabel": "اختر سنة المالية",
     "selectProductYear": "اختر السنة",
     "templateSelectionTitle": "اختيار نموذج حسب نوع الوثيقة",
-    "selectTemplate": "اختر النموذج"
+    "selectTemplate": "اختر النموذج",
+    "clientDefaultsTitle": "القيم الافتراضية لإضافة زبون",
+    "clientDefaultsDesc": "ستكون هذه القيم محددة مسبقاً عند إضافة زبون جديد."
   },
   "language": {
     "ar": "العربية",
@@ -109,7 +124,7 @@
     "searchDefault": "بحث...",
     "searchGeneric": "ابحث في {{entity}}...",
     "emptyGeneric": "لا توجد بيانات {{entity}}.",
-    "addGeneric": "إضافة {{entity}}",
+    "addGeneric": "إضافة",
     "edit": "تعديل",
     "delete": "حذف",
     "confirmDeleteTitle": "تأكيد الحذف",
@@ -171,7 +186,7 @@
     "noActivitiesMessage": "ستظهر هنا العمليات الأخيرة عند توفر بيانات جديدة.",
     "quickActions": "إجراءات سريعة",
     "quickActionsSubtitle": "الوصول السريع إلى الصفحات الأكثر استخداماً",
-    "clientsNotSent": "زبائن غير مرسلين",
+    "clientsNotSent": "زبائن بدون بطاقة",
     "totalClientRevenue": "إيرادات الزبائن: {{amount}}"
   },
   "account": {
@@ -243,6 +258,7 @@
     "totalDebt": "إجمالي الديون",
     "totalPaid": "إجمالي التسديدات",
     "balance": "الرصيد",
+    "paymentExceedsBalance": "لا يمكن أن يتجاوز المبلغ المدفوع الرصيد",
     "totalCount": "إجمالي العمليات",
     "positiveBalance": "رصيد إيجابي",
     "negativeBalance": "رصيد سلبي",
@@ -281,7 +297,8 @@
     "save": "إضافة",
     "update": "تحديث",
     "headerEdit": "تعديل الدين",
-    "headerCreate": "إضافة دين جديد"
+    "headerCreate": "إضافة دين جديد",
+    "purpose": "الغرض"
   },
   "clientErp": {
     "title": "قاعدة بيانات الزبائن",
@@ -295,10 +312,17 @@
     "clearSelection": "إلغاء الاختيار",
     "createTitle": "إضافة زبون جديد"
   },
+  "select_client_to_view_history": "اختر زبون لعرض سجل الديون",
   "client": {
-  "docNumb": "رقم الملف",
+    "docNumb": "رقم الملف",
+    "fullName": "الاسم الكامل",
+    "editTitle": "تعديل الزبون",
+  "yearLabel": "السنة",
   "name": "الأسم",
   "phone": "الهاتف",
+  "tiraz": "الطراز",
+  "tasalaly": "التسلسل",
+  "carnumb": "رقم السيارة",
   "tproduct": "سنة الصنع",
   "tverify": "تاريخ المراقبة",
   "lastTanjime": "آخر تنجيم",
@@ -307,9 +331,26 @@
   "battlenumb": "رقم القارورة",
   "moneyy": "المبلغ",
   "marque": "العلامة",
+  "batteltype": "نوع القارورة",
   "duree": "المدة",
+  "size": "الحجم",
+  "cartype": "نوع السيارة",
   "state": "الحالة",
+  "domicile": "الإقامة",
+  "doc": "المستند",
   "datestart": "ت. بدأ البطاقة",
-  "dateend": "ت.انتهاء البطاقة"
+  "dateend": "ت.انتهاء البطاقة",
+  "sectionBasic": "المعلومات الأساسية",
+  "sectionAdditional": "معلومات إضافية",
+  "selectMarque": "اختر العلامة",
+  "selectBatteltype": "اختر النوع",
+  "selectDays": "اختر المدة",
+  "selectSize": "اختر الحجم",
+  "selectCartype": "اختر نوع السيارة",
+  "selectState": "اختر الحالة",
+  "selectDomicile": "اختر الإقامة",
+  "selectDoc": "اختر المستند",
+  "sizeType": "نوع الحجم",
+  "selectSizeType": "اختر نوع الحجم"
 }
 }

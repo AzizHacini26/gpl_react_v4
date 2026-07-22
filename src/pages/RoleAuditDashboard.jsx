@@ -372,20 +372,7 @@ export default function RoleAuditDashboard() {
         </div>
       </section>
 
-      <section>
-        <div className="dashboard-panel__header" style={{ marginBottom: 'var(--space-4)' }}>
-          <div>
-            <h2 className="dashboard-panel__title" style={{ fontSize: '1.1rem' }}>
-              <i className="pi pi-shield" style={{ marginRight: 'var(--space-2)' }} />
-              {tOrDefault('dashboard.roleSection', 'Role & Permissions')}
-            </h2>
-            <p className="dashboard-panel__subtitle">
-              {tOrDefault('dashboard.roleSectionSubtitle', 'Your current role and access permissions')}
-            </p>
-          </div>
-        </div>
-        <RoleBadge name={roleDisplayName} permissions={userPermissions} />
-      </section>
+      
     </div>
   );
 }

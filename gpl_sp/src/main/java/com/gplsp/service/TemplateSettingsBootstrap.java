@@ -25,12 +25,10 @@ public class TemplateSettingsBootstrap implements CommandLineRunner {
     public void run(String... args) {
         DocumentTypeT verification = ensureDocumentType("VERIFICATION_CERT", "شهادة مراقبة");
         DocumentTypeT registration = ensureDocumentType("REGISTRATION_CARD", "بطاقة السير");
-        DocumentTypeT driving = ensureDocumentType("DRIVING_CERT", "شهادة السير");
 
         ensureSystemTemplate(verification, "verificationReport1", "report1", true);
         ensureSystemTemplate(verification, "verificationReport2", "report2", false);
         ensureSystemTemplate(registration, "registrationReport1", "report1", true);
-        ensureSystemTemplate(driving, "drivingReport1", "report1", true);
     }
 
     private DocumentTypeT ensureDocumentType(String code, String nameAr) {

@@ -14,7 +14,7 @@ import { InputMask } from 'primereact/inputmask';
 import { Calendar } from 'primereact/calendar';
 import { ReportService } from '../services/ReportService';
 import { classNames } from 'primereact/utils';
-import { getDaysNumber, dateAu, dateFormatFR, parseDateValue , dateFormatFRMY } from '../utils/helpers.js';
+import { getDaysNumber, dateAu, dateFormatFR, parseDateValue , dateFormatFRMY, idFormatConvert } from '../utils/helpers.js';
 import { UsersService } from '../services/UsersService';
 import {
   generateNextClientIdCode,
@@ -25,6 +25,7 @@ import {
 } from '../utils/clientIdCode';
 import { formatDZD, parseAmount } from '../utils/currency';
 import { useTranslation } from 'react-i18next';
+import { getClientDefaultFormValues } from '../utils/clientDefaults';
 
 
 const calculateRestDays = (rowData) => {
@@ -204,22 +205,35 @@ export default function Client() {
 
   const moneyBodyTemplate = (rowData) => {
     const amount = parseAmount(rowData.moneyy);
-    const moneyClassName = classNames('money-badge', {
-      'money-badge-low': amount <= 0,
-      'money-badge-medium': amount > 0 && amount < 1000,
-      'money-badge-high': amount >= 1000,
-    });
-
-    return <span className={moneyClassName}>{formatDZD(amount)}</span>;
+    if (!amount) return <span>{formatDZD(amount)}</span>;
+    return (
+      <span
+        style={{
+          display: 'inline-block',
+          padding: '0.25rem 0.6rem',
+          borderRadius: '6px',
+          backgroundColor: '#fdecea',
+          color: '#b71c1c',
+          fontWeight: 600,
+        }}
+      >
+        {formatDZD(amount)}
+      </span>
+    );
   };
 
   const restDaysBodyTemplate = (rowData) => {
-    return rowData.restDays ?? '-';
+    if (rowData.restDays == null) return '-';
+    return <span dir="ltr">{rowData.restDays}</span>;
   };
 
   const clientRowClassName = (rowData) => {
     if (rowData.restDays != null && rowData.restDays <= 0) {
-      return 'row-rest-days-expired';
+      const amount = parseAmount(rowData.moneyy);
+      if (amount !== 0) {
+        return 'row-rest-days-expired';
+      }
+      
     }
     return '';
   };
@@ -228,13 +242,13 @@ export default function Client() {
   { field: 'idcode', header: t('client.docNumb'), sortable: true, filter: true, style: { width: '8rem' } },
   { field: 'name', header: t('client.name'), sortable: true, filter: true, style: { minWidth: '13rem' } },
   { field: 'phone', header: t('client.phone'), sortable: true, filter: true },
+    { field: 'moneyy', header: t('client.moneyy'), filter: true, body: moneyBodyTemplate, style: { maxWidth: '12rem' } },
   { field: 'tproduct', header: t('client.tproduct'), sortable: true, body: (rowData) => formatYearMonth(rowData.tproduct) },
   { field: 'tverify', header: t('client.tverify'), sortable: true },
   { field: 'lastTanjime', header: t('client.lastTanjime'), sortable: true, filter: true },
   { field: 'lastTanjime5', header: t('client.lastTanjime5'), sortable: true, filter: true },
   { field: 'restDays', header: t('client.restDays'), sortable: true, filter: true, body: restDaysBodyTemplate, style: { width: '8rem' } },
   { field: 'battlenumb', header: t('client.battlenumb'), filter: true },
-  { field: 'moneyy', header: t('client.moneyy'), filter: true, body: moneyBodyTemplate, style: { maxWidth: '12rem' } },
   { field: 'mcarmarqueT.nom', header: t('client.marque'), filter: true },
   { field: 'mdaysT.nom', header: t('client.duree'), filter: true, style: { maxWidth: '12rem' } },
   { field: 'mstateT.nom', header: t('client.state'), filter: true },
@@ -247,6 +261,13 @@ export default function Client() {
     const isEditing = !!editingItem;
     const suggestedIdCode = generateNextClientIdCode(clientHook.rawItems || clientHook.items, productYear);
 
+    const defaults = useMemo(() => getClientDefaultFormValues(), []);
+
+    const effectiveFormData = useMemo(() => {
+      if (isEditing) return formData;
+      return { ...defaults, ...formData };
+    }, [isEditing, formData, defaults]);
+
     const handleDialogHide = () => {
       setSelectedErpClient(null);
       setErpSearchText('');
@@ -255,7 +276,7 @@ export default function Client() {
 
     return (
       <Dialog
-        header={isEditing ? 'Edit Client' : t('clientErp.createTitle')}
+        header={isEditing ? t('client.editTitle') : t('clientErp.createTitle')}
         visible={visible}
         style={{ width: 'min(45rem, calc(100vw - 1rem))' }}
         modal
@@ -311,91 +332,106 @@ export default function Client() {
           )}
           {/* Basic Information Section */}
           <div className="client-dialog-grid">
-            <label><strong>Full Name *</strong></label>
-            <InputText value={formData.name || ''} onChange={(e) => onFormChange('name', e.target.value)} />
+            <label><strong>{t('client.fullName')} *</strong></label>
+            <InputText value={effectiveFormData.name || ''} onChange={(e) => onFormChange('name', e.target.value)} />
 
-            <label><strong>ID Code</strong> <span style={{ fontSize: '0.8rem', color: '#888' }}>(Année: {productYear})</span></label>
+            <label><strong>{t('client.docNumb')}</strong> <span style={{ fontSize: '0.8rem', color: '#888' }}>({t('client.yearLabel')}: {productYear})</span></label>
             {isEditing ? (
               <InputText
-                value={formData.idcode || ''}
+                value={effectiveFormData.idcode || ''}
                 onChange={(e) => onFormChange('idcode', e.target.value)}
               />
             ) : (
               <InputText
-                value={formData.idcode ? (formData.idcode.split('-')[0] || '') : (suggestedIdCode.split('-')[0] || '')}
+                value={effectiveFormData.idcode ? (effectiveFormData.idcode.split('-')[1] || '') : (suggestedIdCode.split('-')[1] || '')}
                 onChange={(e) => {
                   const digits = e.target.value.replace(/\D/g, '');
-                  onFormChange('idcode', digits ? `${digits}-${productYear}` : '');
+                  onFormChange('idcode', digits ? `${productYear}-${digits}` : '');
                 }}
-                placeholder={suggestedIdCode.split('-')[0] || '1'}
+                placeholder={suggestedIdCode.split('-')[1] || '1'}
               />
             )}
 
-            <label><strong>Phone *</strong></label>
-            <InputText value={formData.phone || ''} onChange={(e) => onFormChange('phone', e.target.value)} />
+            <label><strong>{t('client.phone')} *</strong></label>
+            <InputText value={effectiveFormData.phone || ''} onChange={(e) => onFormChange('phone', e.target.value)} />
 
-            <label><strong>Tiraz *</strong></label>
-            <InputText value={formData.tiraz || ''} onChange={(e) => onFormChange('tiraz', e.target.value)} />
+            <label><strong>{t('client.tiraz')} *</strong></label>
+            <InputText value={effectiveFormData.tiraz || ''} onChange={(e) => onFormChange('tiraz', e.target.value)} />
 
-            <label><strong>Tasalaly *</strong></label>
-            <InputText value={formData.tasalaly || ''} onChange={(e) => onFormChange('tasalaly', e.target.value)} />
+            <label><strong>{t('client.tasalaly')} *</strong></label>
+            <InputText value={effectiveFormData.tasalaly || ''} onChange={(e) => onFormChange('tasalaly', e.target.value)} />
 
-            <label><strong>Car Number *</strong></label>
-            <InputText value={formData.carnumb || ''} onChange={(e) => onFormChange('carnumb', e.target.value)} />
+            <label><strong>{t('client.carnumb')} *</strong></label>
+            <InputText value={effectiveFormData.carnumb || ''} onChange={(e) => onFormChange('carnumb', e.target.value)} />
 
-            <label><strong>Battle Number *</strong></label>
-            <InputText value={formData.battlenumb || ''} onChange={(e) => onFormChange('battlenumb', e.target.value)} />
+            <label><strong>{t('client.battlenumb')} *</strong></label>
+            <InputText value={effectiveFormData.battlenumb || ''} onChange={(e) => onFormChange('battlenumb', e.target.value)} />
 
-            <label><strong>Money *</strong></label>
-            <InputText value={formData.moneyy || ''} onChange={(e) => onFormChange('moneyy', e.target.value)} />
+            <label><strong>{t('client.moneyy')}</strong></label>
+            <InputText value={effectiveFormData.moneyy || ''} onChange={(e) => onFormChange('moneyy', e.target.value)} disabled={isEditing} />
 
-            <label><strong>Tproduct *</strong></label>
-            <Calendar value={formData.tproduct || ''} onChange={(e) => onFormChange('tproduct', e.value)} view="month" dateFormat="mm/yy" />
+            <label><strong>{t('client.tproduct')} *</strong></label>
+            <Calendar value={effectiveFormData.tproduct || ''} onChange={(e) => onFormChange('tproduct', e.value)} view="month" dateFormat="mm/yy" />
 
-            <label><strong>Tverify *</strong></label>
-            <InputText type="date" value={formData.tverify || ''} onChange={(e) => onFormChange('tverify', e.target.value)} />
+            <label><strong>{t('client.tverify')} *</strong></label>
+            <InputText type="date" value={effectiveFormData.tverify || ''} onChange={(e) => onFormChange('tverify', e.target.value)} />
 
-            <label><strong>Last Tanjime</strong></label>
-            <InputText type="date" value={formData.lastTanjime || ''} onChange={(e) => onFormChange('lastTanjime', e.target.value)} />
+            <label><strong>{t('client.lastTanjime')}</strong></label>
+            <InputText type="date" value={effectiveFormData.lastTanjime || ''} onChange={(e) => onFormChange('lastTanjime', e.target.value)} />
 
-            <label><strong>Last Tanjime +5</strong></label>
-            <InputText type="date" value={formData.lastTanjime5 || ''} onChange={(e) => onFormChange('lastTanjime5', e.target.value)} />
+            <label><strong>{t('client.lastTanjime5')}</strong></label>
+            <InputText type="date" value={effectiveFormData.lastTanjime5 || ''} onChange={(e) => onFormChange('lastTanjime5', e.target.value)} />
           </div>
 
           <Divider />
 
           {/* Additional Information Section */}
           <div className="client-dialog-grid">
-            <label><strong>Mark</strong></label>
-            <Dropdown value={formData.mcarmarqueT || null} onChange={(e) => onFormChange('mcarmarqueT', e.value)} options={carmarques} optionLabel="nom" placeholder="Select Mark" />
+            <label><strong>{t('client.marque')}</strong></label>
+            <Dropdown value={effectiveFormData.mcarmarqueT || null} onChange={(e) => onFormChange('mcarmarqueT', e.value)} options={carmarques} optionLabel="nom" placeholder={t('client.selectMarque')} />
 
-            <label><strong>Battle Type</strong></label>
-            <Dropdown value={formData.mbatteltypeT || null} onChange={(e) => onFormChange('mbatteltypeT', e.value)} options={batteltypes} optionLabel="nom" placeholder="Select Battle Type" />
+            <label><strong>{t('client.batteltype')}</strong></label>
+            <Dropdown value={effectiveFormData.mbatteltypeT || null} onChange={(e) => onFormChange('mbatteltypeT', e.value)} options={batteltypes} optionLabel="nom" placeholder={t('client.selectBatteltype')} />
 
-            <label><strong>Days</strong></label>
-            <Dropdown value={formData.mdaysT || null} onChange={(e) => onFormChange('mdaysT', e.value)} options={days} optionLabel="nom" placeholder="Select Days" />
+            <label><strong>{t('client.duree')}</strong></label>
+            <Dropdown value={effectiveFormData.mdaysT || null} onChange={(e) => onFormChange('mdaysT', e.value)} options={days} optionLabel="nom" placeholder={t('client.selectDays')} />
 
-            <label><strong>Bottle Size</strong></label>
-            <Dropdown value={formData.msizeT || null} onChange={(e) => onFormChange('msizeT', e.value)} options={sizes} optionLabel="nom" placeholder="Select Size" />
+            <label><strong>{t('client.size')}</strong></label>
+            <Dropdown value={effectiveFormData.msizeT || null} onChange={(e) => {
+              onFormChange('msizeT', e.value);
+              const sizeVal = Number(e.value?.nom);
+              onFormChange('sizeType', !isNaN(sizeVal) && sizeVal >= 58 ? 'Cylindrique' : 'Tourique');
+            }} options={sizes} optionLabel="nom" placeholder={t('client.selectSize')} />
 
-            <label><strong>Car Type</strong></label>
-            <Dropdown value={formData.mcartypeT || null} onChange={(e) => onFormChange('mcartypeT', e.value)} options={cartypes} optionLabel="nom" placeholder="Select Car Type" />
+            <label><strong>{t('client.sizeType')}</strong></label>
+            <Dropdown
+              value={effectiveFormData.sizeType || ''}
+              onChange={(e) => onFormChange('sizeType', e.value)}
+              options={[
+                { label: 'Cylindrique', value: 'Cylindrique' },
+                { label: 'Tourique', value: 'Tourique' },
+              ]}
+              placeholder={t('client.selectSizeType')}
+            />
 
-            <label><strong>State</strong></label>
-            <Dropdown value={formData.mstateT || null} onChange={(e) => onFormChange('mstateT', e.value)} options={states} optionLabel="nom" placeholder="Select State" />
+            <label><strong>{t('client.cartype')}</strong></label>
+            <Dropdown value={effectiveFormData.mcartypeT || null} onChange={(e) => onFormChange('mcartypeT', e.value)} options={cartypes} optionLabel="nom" placeholder={t('client.selectCartype')} />
 
-            <label><strong>Domicile</strong></label>
-            <Dropdown value={formData.mdomicileT || null} onChange={(e) => onFormChange('mdomicileT', e.value)} options={domiciles} optionLabel="nom" placeholder="Select Domicile" />
+            <label><strong>{t('client.state')}</strong></label>
+            <Dropdown value={effectiveFormData.mstateT || null} onChange={(e) => onFormChange('mstateT', e.value)} options={states} optionLabel="nom" placeholder={t('client.selectState')} />
 
-            <label><strong>Doc</strong></label>
-            <Dropdown value={formData.mdocT || null} onChange={(e) => onFormChange('mdocT', e.value)} options={docs} optionLabel="nom" placeholder="Select Doc" />
+            <label><strong>{t('client.domicile')}</strong></label>
+            <Dropdown value={effectiveFormData.mdomicileT || null} onChange={(e) => onFormChange('mdomicileT', e.value)} options={domiciles} optionLabel="nom" placeholder={t('client.selectDomicile')} />
+
+            <label><strong>{t('client.doc')}</strong></label>
+            <Dropdown value={effectiveFormData.mdocT || null} onChange={(e) => onFormChange('mdocT', e.value)} options={docs} optionLabel="nom" placeholder={t('client.selectDoc')} />
           </div>
 
           {/* Action Buttons */}
           <div className="client-dialog-actions">
-            <Button label="Cancel" icon="pi pi-times" onClick={onHide} className="p-button-outlined" />
+            <Button label={t('common.cancel')} icon="pi pi-times" onClick={onHide} className="p-button-outlined" />
             <Button
-              label={isEditing ? 'Update' : 'Create'}
+              label={isEditing ? t('common.update') : t('common.create')}
               icon={isEditing ? 'pi pi-check' : 'pi pi-plus'}
               onClick={onSave}
               disabled={saving}
@@ -411,13 +447,13 @@ export default function Client() {
     const idCodeSource = clientHook.rawItems || clientHook.items;
 
     if (manualIdCode && /^\d+$/.test(manualIdCode)) {
-      manualIdCode = `${manualIdCode}-${productYear}`;
+      manualIdCode = `${productYear}-${manualIdCode}`;
     }
 
     const resolvedIdCode = manualIdCode || generateNextClientIdCode(idCodeSource, productYear);
 
     if (!isValidIdCodeFormat(resolvedIdCode)) {
-      window.alert(`ID Code must use this format: number-year (example: 1-2026). Got: "${resolvedIdCode}"`);
+      window.alert(`ID Code must use this format: year-number (example: 2026-1). Got: "${resolvedIdCode}"`);
       return false;
     }
 
@@ -470,12 +506,12 @@ export default function Client() {
         carnumb: rowData?.carnumb, instalateur: companyInfo.adminName || 'N/A',
         agrement: companyInfo.agrement || 'N/A', name: rowData?.name,
         marque: rowData?.mcarmarqueT.nom, tsalsely: rowData?.tasalaly,
-        tiraz: rowData?.tiraz, prod: rowData?.tproduct,
+        tiraz: rowData?.tiraz, prod: dateFormatFRMY(new Date(rowData.tproduct)),
         sizenumb: rowData?.battlenumb + '/' + rowData?.msizeT.nom + 'LT',
         du: rowData?.tverify ? dateFormatFR(new Date(rowData.tverify)) : '',
         days: rowData?.mdaysT.nom, ph1: companyInfo.phone1 || 'N/A',
         ph2: companyInfo.phone2 || 'N/A', email: companyInfo.email || 'N/A',
-        id: rowData?.id, adress: companyInfo.adresse || 'N/A',
+        id:  idFormatConvert(rowData?.idcode), adress: companyInfo.adresse || 'N/A',
         type: rowData?.mbatteltypeT.nom, au: dateAu(rowData),
       }),
     },
@@ -489,7 +525,7 @@ export default function Client() {
         marque: rowData?.mcarmarqueT.nom, tsalsely: rowData?.tasalaly,
         tiraz: rowData?.tiraz, prod: rowData?.tproduct,
         battlenumb: rowData?.battlenumb,
-        sizenumb: rowData?.battlenumb + '/' + rowData?.msizeT.nom + 'LT',
+        sizenumb:  rowData?.msizeT.nom + 'LT',
         du: dateFormatFRMY(new Date(rowData.tproduct)),
         type: rowData?.mcartypeT.nom,
         au: rowData?.lastTanjime ? dateFormatFRMY(new Date(rowData.lastTanjime)) : '',
@@ -561,7 +597,7 @@ export default function Client() {
 
   const renderInsetDatesDialog = () => {
     return (<Dialog
-      header="Insert Dates"
+      header="إدخال تواريخ البطاقة"
       visible={showInsetDatesDialog}
       style={{ width: 'min(28rem, calc(100vw - 1rem))' }}
       modal
@@ -569,10 +605,10 @@ export default function Client() {
     >
       <div className="p-fluid" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <output style={{ fontStyle: 'italic', color: '#555' }}>
-          selected client: {selectedClient ? `${selectedClient.name} (ID: ${selectedClient.id})` : 'None'}
+          {selectedClient ? `${selectedClient.name} (${selectedClient.idcode})` : 'None'}
         </output>
         <div style={{ display: 'grid', gap: '0.5rem' }}>
-          <label htmlFor="dateStart"><strong>Date Start</strong></label>
+          <label htmlFor="dateStart"><strong>تاريخ البداية</strong></label>
           <InputText
             id="dateStart"
             type="date"
@@ -581,7 +617,7 @@ export default function Client() {
           />
         </div>
         <div style={{ display: 'grid', gap: '0.5rem' }}>
-          <label htmlFor="dateEnd"><strong>Date End</strong></label>
+          <label htmlFor="dateEnd"><strong>تاريخ النهاية</strong></label>
           <InputText
             id="dateEnd"
             type="date"
@@ -616,7 +652,7 @@ export default function Client() {
         rowActions={[
           {
             key: 'reports',
-            label: 'التقارير',
+           
             icon: 'pi pi-print',
             severity: 'info',
             onClick: (rowData) => {
@@ -626,7 +662,7 @@ export default function Client() {
           },
           {
             key: 'Dates',
-            label: 'Dates',
+          
             icon: 'pi pi-calendar-plus',
             severity: 'info',
             onClick: (rowData) => {

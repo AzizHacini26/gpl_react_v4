@@ -320,7 +320,7 @@ export function EntityTable({
               body={actionsTemplate}
               style={actionsColumnStyle}
               frozen={frozenActions}
-              alignFrozen="right"
+              alignFrozen={document.documentElement.dir === 'rtl' ? 'left' : 'right'}
             />
           )}
         </DataTable>

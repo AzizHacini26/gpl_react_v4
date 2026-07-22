@@ -7,7 +7,9 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import org.springframework.core.io.ClassPathResource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
@@ -28,16 +30,11 @@ public class ReportS {
         this.templateSettingsS = templateSettingsS;
     }
 
+    private static final PathMatchingResourcePatternResolver resourceResolver = new PathMatchingResourcePatternResolver();
+
     public byte[] generatePdf(String reportName, Map<String, Object> params) {
-        ClassPathResource jrxmlResource = new ClassPathResource("reports/" + reportName + ".jrxml");
-        ClassPathResource jasperResource = new ClassPathResource("reports/" + reportName + ".jasper");
-
-        if (!jrxmlResource.exists() && !jasperResource.exists()) {
-            throw new IllegalArgumentException("Report not found: " + reportName);
-        }
-
         try {
-            JasperReport report = loadReport(jrxmlResource, jasperResource);
+            JasperReport report = loadReport(reportName);
             JasperPrint jasperPrint = fillReport(report, params);
             return JasperExportManager.exportReportToPdf(jasperPrint);
         } catch (SQLException | JRException | IOException e) {
@@ -50,17 +47,22 @@ public class ReportS {
         return generatePdf(reportName, params);
     }
 
-    private JasperReport loadReport(ClassPathResource jrxmlResource, ClassPathResource jasperResource)
-            throws IOException, JRException {
-        if (jrxmlResource.exists()) {
-            try (InputStream jrxmlStream = jrxmlResource.getInputStream()) {
+    private JasperReport loadReport(String reportName) throws IOException, JRException {
+        Resource[] jrxmlResources = resourceResolver.getResources("classpath:reports/**/" + reportName + ".jrxml");
+        if (jrxmlResources.length > 0) {
+            try (InputStream jrxmlStream = jrxmlResources[0].getInputStream()) {
                 return JasperCompileManager.compileReport(jrxmlStream);
             }
         }
 
-        try (InputStream jasperStream = jasperResource.getInputStream()) {
-            return (JasperReport) net.sf.jasperreports.engine.util.JRLoader.loadObject(jasperStream);
+        Resource[] jasperResources = resourceResolver.getResources("classpath:reports/**/" + reportName + ".jasper");
+        if (jasperResources.length > 0) {
+            try (InputStream jasperStream = jasperResources[0].getInputStream()) {
+                return (JasperReport) JRLoader.loadObject(jasperStream);
+            }
         }
+
+        throw new IllegalArgumentException("Report not found: " + reportName);
     }
 
     private JasperPrint fillReport(JasperReport report, Map<String, Object> params) throws SQLException, JRException {

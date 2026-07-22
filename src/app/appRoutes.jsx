@@ -6,6 +6,7 @@ import Roles from '../pages/Role';
 import Account from '../pages/Account';
 import MultiTypes from '../pages/MultiTypes';
 import Client from '../pages/Client';
+import AddClient from '../pages/AddClient';
 import ClientNotSent from '../pages/ClientsNotSent';
 import ClientCards from '../pages/ClientCards';
 import ClientErp from '../pages/ClientErp';
@@ -18,6 +19,7 @@ export const appRoutes = [
   { path: '/', label: 'Home', icon: 'pi pi-home', element: <RoleAuditDashboard /> },
   { path: '/users', label: 'Users', icon: 'pi pi-users', requiredPermission: 'READ_USERS', element: <Users /> },
   { path: '/clients', label: 'Clients', icon: 'pi pi-id-card',requiredPermission: 'READ_CLIENTS', element: <Client /> },
+  { path: '/add-client', label: 'Add Client', icon: 'pi pi-user-plus', requiredPermission: 'READ_CLIENTS', element: <AddClient /> },
    { path: '/ClientsNotSent', label: 'Clients Not Sent', icon: 'pi pi-id-card',requiredPermission: 'READ_CLIENTS', element: <ClientNotSent /> },
    {path: '/clientcards', label: 'Client Cards', icon: 'pi pi-id-card',requiredPermission: 'READ_CLIENTS', element: <ClientCards />},
    {path: '/client-erp', label: 'Clients ERP', icon: 'pi pi-database',requiredPermission: 'READ_CLIENTS', element: <ClientErp />},

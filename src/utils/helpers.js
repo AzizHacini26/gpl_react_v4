@@ -1,3 +1,10 @@
+export const idFormatConvert = (idcode) => {
+  if (!idcode) return '';
+  const parts = String(idcode).split('-');
+  if (parts.length === 2) return `${parts[1]}/${parts[0]}`;
+  return idcode;
+};
+
 export const getDaysNumber = (mdays) => {
   if (typeof mdays === 'number') return mdays;
   const fromNom = mdays?.nom ?? mdays?.name ?? mdays;

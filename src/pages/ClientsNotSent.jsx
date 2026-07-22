@@ -9,7 +9,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { MultiTypesService } from '../services/MultiTypesService';
 import { useState, useEffect, useMemo, useRef } from 'react';
  import { Calendar } from 'primereact/calendar';
- import { classNames } from 'primereact/utils';
+
 import { Toast } from 'primereact/toast';
 import {
   generateNextClientIdCode,
@@ -51,7 +51,8 @@ const calculateRestDays = (rowData) => {
 function useClientsWithRestDays() {
   const hook = useClients();
   const itemsWithRestDays = useMemo(() => {
-    const mapped = hook.items.map((item) => ({ ...item, restDays: calculateRestDays(item) }));
+    const filtered = hook.items.filter((item) => !item.datestart && !item.dateend && !item.sent);
+    const mapped = filtered.map((item) => ({ ...item, restDays: calculateRestDays(item) }));
     mapped.sort((a, b) => {
       if (a.datestart && !b.datestart) return 1;
       if (!a.datestart && b.datestart) return -1;
@@ -64,6 +65,7 @@ function useClientsWithRestDays() {
     ...hook,
     rawItems: hook.items,
     items: itemsWithRestDays,
+    footer: `Total: ${itemsWithRestDays.length} clients`,
   };
 }
 
@@ -140,22 +142,30 @@ export default function ClientNotSent() {
 
   const moneyBodyTemplate = (rowData) => {
     const amount = parseAmount(rowData.moneyy);
-    const moneyClassName = classNames('money-badge', {
-      'money-badge-low': amount <= 0,
-      'money-badge-medium': amount > 0 && amount < 1000,
-      'money-badge-high': amount >= 1000,
-    });
-
-    return <span className={moneyClassName}>{formatDZD(amount)}</span>;
+    if (!amount) return <span>{formatDZD(amount)}</span>;
+    return (
+      <span
+        style={{
+          display: 'inline-block',
+          padding: '0.25rem 0.6rem',
+          borderRadius: '6px',
+          backgroundColor: '#fdecea',
+          color: '#b71c1c',
+          fontWeight: 600,
+        }}
+      >
+        {formatDZD(amount)}
+      </span>
+    );
   };
 
   const restDaysBodyTemplate = (rowData) => {
-    return rowData.restDays ?? '-';
+    if (rowData.restDays == null) return '-';
+    return <span dir="ltr">{rowData.restDays}</span>;
   };
 
   const clientRowClassName = (rowData) => {
-    if (rowData.datestart) return 'row-sent';
-    if (rowData.restDays != null && rowData.restDays <= 0) return 'row-rest-days-expired';
+    if (rowData.sent) return 'row-sent';
     return '';
   };
 
@@ -193,7 +203,7 @@ export default function ClientNotSent() {
             <InputText
               value={formData.idcode || ''}
               onChange={(e) => onFormChange('idcode', e.target.value)}
-              placeholder={`Auto: 1-${productYear}`}
+              placeholder={`Auto: ${productYear}-1`}
             />
             
             <label><strong>Phone *</strong></label>
@@ -271,7 +281,7 @@ export default function ClientNotSent() {
     const resolvedIdCode = manualIdCode || generateNextClientIdCode(idCodeSource, productYear);
 
     if (!isValidIdCodeFormat(resolvedIdCode)) {
-      window.alert('ID Code must use this format: number-year (example: 1-2026).');
+      window.alert('ID Code must use this format: year-number (example: 2026-1).');
       return false;
     }
 
@@ -518,7 +528,6 @@ export default function ClientNotSent() {
       return;
     }
 
-    const today = new Date().toISOString().split('T')[0];
     toast.current?.show({
       severity: 'info',
       summary: 'جاري التحديث',
@@ -531,8 +540,7 @@ export default function ClientNotSent() {
         const { restDays: _restDays, ...baseClient } = client;
         return clientHook.updateItem(client.id, {
           ...baseClient,
-          datestart: today,
-          dateend: today,
+          sent: true,
         });
       }),
     );
@@ -560,11 +568,12 @@ export default function ClientNotSent() {
         title="Clients"
         entityName="client"
         columns={columns}
+        frozenActions
         rowActions={[
          
           {
             key: 'Dates',
-            label: 'Dates',
+         
             icon: 'pi pi-calendar-plus',
             severity: 'info',
             onClick: (rowData) => {
@@ -611,21 +620,7 @@ export default function ClientNotSent() {
               onClick={handleSelectRange}
               disabled={!rangeFrom || !rangeTo}
             />
-            <Button
-              type="button"
-              severity="help"
-              icon="pi pi-check-square"
-              label="Select All"
-              onClick={() => setSelectedClients(clientHook.items)}
-            />
-            <Button
-              type="button"
-              severity="secondary"
-              icon="pi pi-times"
-              label="Clear Selection"
-              outlined
-              onClick={() => setSelectedClients([])}
-            />
+            
              <Button
                type="button"
                severity="secondary"

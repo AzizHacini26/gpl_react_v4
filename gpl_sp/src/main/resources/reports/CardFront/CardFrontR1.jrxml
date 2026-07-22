@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="024921ea-90a8-47eb-a45b-4d250cf5248b">
 	<property name="ireport.zoom" value="2.1435888100000042"/>
-	<property name="ireport.x" value="808"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="503"/>
+	<property name="ireport.y" value="626"/>
 	<parameter name="carnumb" class="java.lang.String"/>
 	<parameter name="name" class="java.lang.String"/>
 	<parameter name="marque" class="java.lang.String"/>
@@ -24,16 +24,16 @@
 				<reportElement x="425" y="0" width="377" height="555" uuid="92ca8676-84ba-4988-80e2-819828e12045"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="619" y="207" width="54" height="16" uuid="f9d02654-54e8-48bb-b144-b3da190e6237"/>
+				<reportElement x="607" y="207" width="54" height="18" uuid="f9d02654-54e8-48bb-b144-b3da190e6237"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Marque :]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="490" y="207" width="120" height="16" uuid="831e153b-3e64-4cb7-97ee-9fe22e53fa8b"/>
+				<reportElement x="487" y="207" width="117" height="16" uuid="831e153b-3e64-4cb7-97ee-9fe22e53fa8b"/>
 				<textElement>
-					<font isBold="true"/>
+					<font isBold="true" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{type}]]></textFieldExpression>
 			</textField>
@@ -56,7 +56,7 @@
 				<textFieldExpression><![CDATA["Wilaya " + $P{wilaya} +" LE : ....../......"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="692" y="161" width="108" height="16" uuid="aef1cd10-3f49-457b-bde2-92962ff28a8f"/>
+				<reportElement x="686" y="161" width="114" height="16" uuid="aef1cd10-3f49-457b-bde2-92962ff28a8f"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -95,7 +95,7 @@ distribution du GPL carburant sur les véhicules Automobiles.]]></text>
 				<text><![CDATA[Le directeur de l'énergie et des mines]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="619" y="229" width="59" height="16" uuid="db4c6f69-c607-49b2-976a-39ca41de3fc8"/>
+				<reportElement x="607" y="229" width="59" height="16" uuid="db4c6f69-c607-49b2-976a-39ca41de3fc8"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -130,7 +130,7 @@ distribution du GPL carburant sur les véhicules Automobiles.]]></text>
 				<textFieldExpression><![CDATA[$P{du}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="680" y="229" width="120" height="16" uuid="b65e02e7-d293-41a1-9575-cff39607fa34"/>
+				<reportElement x="666" y="229" width="134" height="16" uuid="b65e02e7-d293-41a1-9575-cff39607fa34"/>
 				<textFieldExpression><![CDATA[$P{tsalsely}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -159,7 +159,7 @@ installations du G.P.L carburant équipant les véhicules automobiles .]]></text
 			<textField>
 				<reportElement mode="Transparent" x="525" y="134" width="255" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="9b198b0a-f68b-4f3c-b18f-577f4cf2ef73"/>
 				<textElement verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{domc}]]></textFieldExpression>
@@ -167,15 +167,16 @@ installations du G.P.L carburant équipant les véhicules automobiles .]]></text
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="525" y="118" width="242" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="a67a8e8c-d5d4-4309-87c8-690abf9c6701"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="673" y="207" width="127" height="16" uuid="1b060c66-b965-43b5-90ec-c27c54739b5f"/>
-				<textElement>
-					<font isBold="true"/>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="666" y="207" width="134" height="18" forecolor="#000000" backcolor="#FFFFFF" uuid="1b060c66-b965-43b5-90ec-c27c54739b5f"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{marque}]]></textFieldExpression>
 			</textField>
@@ -201,7 +202,7 @@ installations du G.P.L carburant équipant les véhicules automobiles .]]></text
 				<text><![CDATA[Monsieur :]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="490" y="229" width="120" height="16" uuid="6d912fc5-3d31-4dff-b265-baf749e081e3"/>
+				<reportElement x="487" y="229" width="117" height="16" uuid="6d912fc5-3d31-4dff-b265-baf749e081e3"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>

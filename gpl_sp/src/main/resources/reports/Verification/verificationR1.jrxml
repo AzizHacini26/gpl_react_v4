@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="525a40bc-e97c-4623-a6bd-64da8259f016">
 	<property name="ireport.zoom" value="1.9487171000000019"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1066"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="carnumb" class="java.lang.String"/>
 	<parameter name="instalateur" class="java.lang.String"/>
 	<parameter name="agrement" class="java.lang.String"/>
@@ -39,7 +39,7 @@
 			<staticText>
 				<reportElement x="130" y="21" width="325" height="34" uuid="c043337f-a425-4f13-b133-cf328d8dcdd8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="20" isBold="true" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="20" isBold="true" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[الجمهورية الجزائرية الديمقراطية الشعبية]]></text>
 			</staticText>
@@ -150,7 +150,7 @@
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="110" y="299" width="146" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="2bb655e9-7646-41a6-ba15-c84bad6f69a1"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{carnumb}]]></textFieldExpression>
@@ -165,7 +165,7 @@
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="345" y="299" width="158" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="55959caa-fdbe-4d81-b4b7-eddc41013079"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
@@ -173,7 +173,7 @@
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="110" y="323" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="1c93c797-6785-4efe-8d81-51a1cf0e2423"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{marque}]]></textFieldExpression>
@@ -181,7 +181,7 @@
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="256" y="323" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="ceeca3f2-9059-4aba-9396-3d8e413ad88c"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{tiraz}]]></textFieldExpression>
@@ -189,7 +189,7 @@
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="426" y="323" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="7d2f74de-e405-427a-9ba1-ab4b166a10b4"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{tsalsely}]]></textFieldExpression>
@@ -204,7 +204,7 @@
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="122" y="356" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="3cc6686f-3e7d-461a-ac5d-57c322c8f25c"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{sizenumb}]]></textFieldExpression>
@@ -233,7 +233,7 @@
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="290" y="356" width="48" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="60842713-ae21-41a4-9e68-de006f93c6a2"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{prod}]]></textFieldExpression>
@@ -241,7 +241,7 @@
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="384" y="356" width="56" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="cf033b98-3a3a-4756-a50a-c0dfe069a617"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{type}]]></textFieldExpression>
@@ -277,7 +277,7 @@
 			<textField>
 				<reportElement mode="Transparent" x="276" y="227" width="279" height="22" forecolor="#000000" backcolor="#FFFFFF" uuid="0531a84b-935d-4bd0-99c5-5f5b1a7530ea"/>
 				<textElement verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{agrement}]]></textFieldExpression>
@@ -292,7 +292,7 @@
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" mode="Transparent" x="151" y="81" width="274" height="18" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF" uuid="521f2f2f-f6fb-4863-b577-23a5ff8379a7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" العنوان :" + $P{adress} + "  الهاتف :" + $P{ph1} + "/" +$P{ph2}]]></textFieldExpression>
@@ -300,7 +300,7 @@
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" mode="Transparent" x="151" y="99" width="275" height="12" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF" uuid="5b771932-c9fe-48e7-a7a1-6e69f126a3aa"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA["email : " + $P{email}]]></textFieldExpression>
@@ -308,7 +308,7 @@
 			<staticText>
 				<reportElement mode="Transparent" x="150" y="33" width="275" height="29" forecolor="#000000" backcolor="#FFFFFF" uuid="e23ae024-743d-4638-9162-eff6314b62b7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="Arial" size="20" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="D://iReport-5.6.0/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="Arial" size="20" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="classpath:fonts/NotoNaskhArabic-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[نشكركم على الزيارة]]></text>

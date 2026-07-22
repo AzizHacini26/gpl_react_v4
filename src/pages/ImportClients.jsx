@@ -38,7 +38,15 @@ export default function ImportClients() {
 
     setImporting(true);
     try {
-      const res = await ClientService.importClients(data);
+      const mapped = data.map((row) => {
+        const r = { ...row };
+        if (r.number !== undefined) {
+          r.battlenumb = r.number;
+        }
+        delete r.number;
+        return r;
+      });
+      const res = await ClientService.importClients(mapped);
       setResult(res);
       toast.current.show({ severity: 'success', summary: 'Done', detail: `${res.imported} imported, ${res.skipped} skipped.` });
     } catch (err) {
